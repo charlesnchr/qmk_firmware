@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
-        KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPACE,                            _______, MO(_fn), _______, _______, _______
+        KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPACE,                            MO(_fn), _______, _______, _______, _______
     ),
     [_colemak] = LAYOUT_60_ansi_arrow(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______,
@@ -68,8 +68,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,
         LALT(KC_T),     _______, LALT(KC_W), _______, _______, _______, _______, _______, LCTL(KC_U), LCTL(KC_D), KC_HOME, KC_PGUP, KC_PGDN, KC_END,
         _______,       LCTL(KC_1), LCTL(KC_2), LCTL(KC_3), LCTL(KC_4), LCTL(KC_5), KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, _______, _______, KC_MPLY,
-        _______,            KC_SPC, LALT(KC_LCBR), LALT(KC_RCBR), LALT(KC_LBRC), LALT(KC_RBRC), KC_LPRN, KC_RPRN, KC_VOLD, KC_VOLU, KC_MPRV, KC_MNXT, _______,
-        _______,   _______,   _______,                      KC_SPC,                              MO(_mouse), MO(_rgb),   _______,   _______, _______
+        _______,            KC_SPC, LCTL(KC_PGUP), LCTL(KC_PGDN),LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_LEFT), LCTL(KC_RGHT), KC_VOLD, KC_VOLU, KC_MPRV, KC_MNXT, _______,
+        _______,   _______,   _______,                      MO(_mouse),                              MO(_mouse), MO(_rgb),   _______,   _______, _______
     ),
     [_rgb] = LAYOUT_60_ansi_arrow(
         RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
