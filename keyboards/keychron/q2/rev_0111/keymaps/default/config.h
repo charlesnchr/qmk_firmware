@@ -7,4 +7,7 @@
 /* #define RGB_DISABLE_WHEN_USB_SUSPENDED */
 /* #define LEADER_TIMEOUT 300 */
 /* #define TAPPING_TERM 175 */
-/* #define COMBO_COUNT 4 */
+/* #define IGNORE_MOD_TAP_INTERRUPT */
+#define COMBO_COUNT 1
+#define COMBO_TERM 50
+#define TAPPING_FORCE_HOLD
