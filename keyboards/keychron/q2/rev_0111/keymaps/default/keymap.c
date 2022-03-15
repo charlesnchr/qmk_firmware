@@ -22,6 +22,8 @@ enum layers {
     _FN1,
     _FN2,
     _FN3,
+    _FN4,
+    _FN5,
     _gamer,
     _colemak,
     _spcfn,
@@ -37,7 +39,17 @@ enum custom_keycodes {
     KC_FLXP,
     gamer = SAFE_RANGE,
     qwerty,
-    colemak
+    colemak,
+    aes,
+    ae,
+    oe,
+    oes,
+    aa,
+    aas,
+    pnd,
+    eur,
+    i3,
+    i3ws,
 };
 
 #define KC_WAVE S(KC_GRV)
@@ -57,18 +69,18 @@ combo_t key_combos[COMBO_COUNT] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_all(
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,   KC_BSPC,          KC_VOLD, KC_MUTE, KC_VOLU,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,   KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,  KC_RBRC,  KC_BSLS,          KC_DEL,
         LCTL_T(KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,            KC_ENT,           KC_HOME,
         KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,            KC_RSFT, KC_UP,
         KC_CAPS, KC_LOPT, KC_LCMD,                            LT(_spcfnMac,KC_SPC),                             KC_RCMD, MO(_FN1), MO(_FN3), KC_LEFT, KC_DOWN, KC_RGHT),
 
     [WIN_BASE] = LAYOUT_all(
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSPC,          KC_VOLD, KC_MUTE, KC_VOLU,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,  KC_RBRC,   KC_BSLS,          LGUI(LALT(KC_H)),
         LCTL_T(KC_ESC),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,   KC_ENT,           LGUI(LALT(KC_L)),
-        KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,             RSFT_T(KC_F13),          KC_UP,
-        KC_CAPS, KC_LGUI, LALT_T(KC_F13),                            LT(_spcfn,KC_SPC),                             RCTL_T(KC_F13), MO(_FN2), MO(_FN3), KC_LEFT, KC_DOWN, KC_RGHT),
+        KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,             i3,          KC_UP,
+        MO(_FN4), KC_LGUI, LALT_T(KC_F13),                            LT(_spcfn,KC_SPC),                             RCTL_T(KC_F13), RALT_T(KC_F13), MO(_FN3), KC_LEFT, KC_DOWN, KC_RGHT),
 
     [_FN1] = LAYOUT_all(
         KC_GRV,  KC_BRID, KC_BRIU, KC_MCTL, KC_LPAD, RGB_VAD, RGB_VAI, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD,  KC_VOLU,   KC_TRNS,          KC_VOLD, KC_MUTE, KC_VOLU,
@@ -91,6 +103,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS,                            KC_TRNS, KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS),
 
+    [_FN4] = LAYOUT_all(
+        KC_WAVE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12,    RESET,          KC_VOLD, KC_MUTE, KC_VOLU,
+        RGB_TOG,  KC_BTN1, KC_MS_UP, KC_BTN2, KC_WH_U, KC_WH_L, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, aa,  KC_TRNS, KC_TRNS,          KC_TRNS,
+        KC_BTN1,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_WH_D, KC_WH_R, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, ae, oe,           KC_TRNS,          KC_TRNS,
+        MO(_FN5),          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_VOLD, KC_VOLU, KC_MPRV, KC_MNXT, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS,                            KC_TRNS, KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS),
+
+    [_FN5] = LAYOUT_all(
+        KC_WAVE, KC_F1,   KC_F2,   pnd,   eur,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12,    RESET,          KC_VOLD, KC_MUTE, KC_VOLU,
+        RGB_TOG,  KC_BTN1, KC_MS_UP, KC_BTN2, KC_WH_U, KC_WH_L, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, aas,  KC_TRNS, KC_TRNS,          KC_TRNS,
+        KC_BTN1,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_WH_D, KC_WH_R, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, aes, oes,           KC_TRNS,          KC_TRNS,
+        KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS,                            KC_TRNS, KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS),
+
     [_gamer] = LAYOUT_all(
             KC_ESC, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,  _______, _______,
             KC_TAB, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
@@ -108,11 +134,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             ),
 
     [_spcfn] = LAYOUT_all(
-            KC_ESC,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  LCTL(KC_BSPC), KC_VOLD, KC_MUTE, KC_VOLU,
+            KC_ESC,   S(KC_1),    S(KC_2),    S(KC_3),    S(KC_4),    S(KC_5),    S(KC_6),    S(KC_7),    S(KC_8),    S(KC_9),    S(KC_0),  S(KC_MINS),  S(KC_EQL),  LCTL(KC_BSPC), KC_VOLD, KC_MUTE, KC_VOLU,
             KC_HOME,  LGUI(KC_Q), LCTL(KC_W), KC_END, LGUI(KC_R), LCTL(KC_T), LGUI(KC_ENT), LCTL(KC_U), LCTL(KC_D), LCTL(KC_6), KC_PGDN, KC_PGUP, LCTL(KC_DEL), KC_DEL, LGUI(LSFT(KC_H)),
-            _______,       LCTL(KC_1), LCTL(KC_2), LCTL(KC_3), LCTL(KC_4), LCTL(KC_5), KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, _______, _______, KC_MPLY, LGUI(LSFT(KC_L)),
-            _______,            KC_SPC, LCTL(KC_PGUP), LCTL(KC_PGDN),LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_LEFT), LCTL(KC_RGHT), KC_VOLD, KC_VOLU, KC_MPRV, KC_MNXT, _______,
-            MO(_mouse),   _______,   _______,                      KC_SPC,                              MO(_mouse),   MO(_rgb),   _______,   _______,   _______,   _______
+            _______,       LCTL(KC_1), LCTL(KC_2), LCTL(KC_3), i3, i3ws, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, LGUI(LCTL(KC_H)), LGUI(LCTL(KC_L)), LGUI(KC_ENT), LGUI(LSFT(KC_L)),
+            _______,            KC_SPC, LCTL(KC_PGUP), LCTL(KC_PGDN),LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_LEFT), LCTL(KC_RGHT), LGUI(KC_H), LGUI(KC_L), LGUI(KC_B), LGUI(LSFT(KC_ENT)), _______,
+            MO(_mouse),   OSL(_spcfn),   _______,                      KC_SPC,                              MO(_mouse),   MO(_rgb),   _______,   _______,   _______,   _______
             ),
     [_spcfnMac] = LAYOUT_all(
             KC_ESC,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL, KC_VOLD, KC_MUTE, KC_VOLU,
@@ -143,6 +169,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 static uint8_t  encoder_state[ENCODERS] = {0};
 static keypos_t encoder_cw[ENCODERS]    = {{ 8, 4 }};
 static keypos_t encoder_ccw[ENCODERS]  = {{ 7, 4 }};
+
+
 
 void encoder_action_register(uint8_t index, bool clockwise) {
     keyevent_t encoder_event = (keyevent_t) {
@@ -179,7 +207,62 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 #endif
 
+bool i3_bool = false;											//Global repeat variable
+bool i3_returnlayer = false;											//Global repeat variable
+static uint16_t key_timer;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+    if (i3_returnlayer) {
+        layer_clear();
+        layer_on(_spcfn);
+        i3_returnlayer = false;
+        i3_bool = false;
+        switch (keycode) {
+            case KC_SPC:
+                if (record->event.pressed) {							//When key is pressed
+                } else {
+                    i3_bool = false;
+                    layer_clear();
+                    layer_on(WIN_BASE);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    if (i3_bool) {
+            switch (keycode) {
+                case KC_SPC:
+                    if (record->event.pressed) {							//When key is pressed
+                    } else {
+                        i3_bool = false;
+                        layer_clear();
+                        layer_on(WIN_BASE);
+                    }
+                    return false;  // Skip all further processing of this key
+                case KC_ESC:
+                    if (record->event.pressed) {							//When key is pressed
+                        i3_bool = false;
+                        layer_clear();
+                        layer_on(WIN_BASE);
+                    } else {
+                        i3_bool = false;
+                        layer_clear();
+                        layer_on(WIN_BASE);
+                    }
+                    return false;  // Skip all further processing of this key
+                default:
+                    if (record->event.pressed) {							//When key is pressed
+                        i3_returnlayer = true;
+                    } else {
+                    }
+                    break;
+            }
+    }
+
+
     switch (keycode) {
         case KC_MISSION_CONTROL:
             if (record->event.pressed) {
@@ -232,6 +315,92 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 layer_clear();
                 layer_on(_gamer);
+            }
+            return false;
+            break;
+        case ae:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("a"));
+                SEND_STRING("e");
+            }
+            return false;
+            break;
+        case oe:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("o"));
+                SEND_STRING("/");
+            }
+            return false;
+            break;
+        case aes:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("A"));
+                SEND_STRING("E");
+            }
+            return false;
+            break;
+        case oes:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("O"));
+                SEND_STRING("/");
+            }
+            return false;
+            break;
+        case aa:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("a"));
+                SEND_STRING("a");
+            }
+            return false;
+            break;
+        case aas:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("A"));
+                SEND_STRING("A");
+            }
+            return false;
+            break;
+        case pnd:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("l"));
+                SEND_STRING("-");
+            }
+            return false;
+            break;
+        case eur:
+            if (record->event.pressed) {
+                SEND_STRING(SS_RALT("="));
+                SEND_STRING("e");
+            }
+            return false;
+            break;
+        case i3:
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                register_code(KC_LSFT);
+                register_code(KC_A);
+                unregister_code(KC_LGUI);
+                unregister_code(KC_LSFT);
+                unregister_code(KC_A);
+                layer_clear();
+                layer_on(WIN_BASE);
+            } else {
+            }
+            return false;
+            break;
+        case i3ws:
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                register_code(KC_LSFT);
+                register_code(KC_TAB);
+                unregister_code(KC_LGUI);
+                unregister_code(KC_LSFT);
+                unregister_code(KC_TAB);
+                layer_clear();
+                layer_on(WIN_BASE);
+                i3_bool = true;
+                key_timer = timer_read();
+            } else {
             }
             return false;
             break;
