@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_spcfn] = LAYOUT_all(
             KC_ESC,   S(KC_1),    S(KC_2),    S(KC_3),    S(KC_4),    S(KC_5),    S(KC_6),    S(KC_7),    S(KC_8),    S(KC_9),    S(KC_0),  S(KC_MINS),  S(KC_EQL),  LCTL(KC_BSPC), KC_VOLD, KC_MUTE, KC_VOLU,
-            KC_HOME,  LGUI(KC_Q), LCTL(KC_W), KC_END, LGUI(KC_R), LCTL(KC_T), LGUI(KC_ENT), LCTL(KC_U), LCTL(KC_D), LCTL(KC_6), KC_PGDN, KC_PGUP, LCTL(KC_DEL), KC_DEL, LGUI(LSFT(KC_H)),
+            KC_HOME,  LGUI(KC_Q), LCTL(KC_W), KC_END, LGUI(KC_R), LCTL(KC_T), LGUI(KC_ENT), LCTL(KC_U), LCTL(KC_D), LCTL(KC_6), KC_PGUP, KC_PGDN, LCTL(KC_DEL), KC_DEL, LGUI(LSFT(KC_H)),
             _______,       LCTL(KC_1), LCTL(KC_2), LCTL(KC_3), i3, i3ws, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, LGUI(LCTL(KC_H)), LGUI(LCTL(KC_L)), LGUI(KC_ENT), LGUI(LSFT(KC_L)),
             _______,            KC_SPC, LCTL(KC_PGUP), LCTL(KC_PGDN),LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_LEFT), LCTL(KC_RGHT), LGUI(KC_H), LGUI(KC_L), LGUI(KC_B), LGUI(LSFT(KC_ENT)), _______,
             MO(_mouse),   OSL(_spcfn),   _______,                      KC_SPC,                              MO(_mouse),   MO(_rgb),   _______,   _______,   _______,   _______
@@ -211,54 +211,54 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 bool i3_bool = false;											//Global repeat variable
 bool i3_returnlayer = false;											//Global repeat variable
-static uint16_t key_timer;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     if (i3_returnlayer) {
-        layer_clear();
-        layer_on(_spcfn);
-        i3_returnlayer = false;
-        i3_bool = false;
         switch (keycode) {
-            case KC_SPC:
+            case LT(_spcfn,KC_SPC):
                 if (record->event.pressed) {							//When key is pressed
                 } else {
                     i3_bool = false;
                     layer_clear();
                     layer_on(WIN_BASE);
+                    return false;
                 }
                 break;
             default:
                 break;
         }
+        layer_clear();
+        layer_on(_spcfn);
+        i3_returnlayer = false;
+        i3_bool = false;
     }
 
     if (i3_bool) {
             switch (keycode) {
-                case KC_SPC:
+                case LT(_spcfn,KC_SPC):
                     if (record->event.pressed) {							//When key is pressed
                     } else {
                         i3_bool = false;
+                        i3_returnlayer = false;
                         layer_clear();
                         layer_on(WIN_BASE);
                     }
-                    return false;  // Skip all further processing of this key
-                case KC_ESC:
+                    break;
+                case LCTL_T(KC_ESC):
                     if (record->event.pressed) {							//When key is pressed
                         i3_bool = false;
+                        i3_returnlayer = false;
                         layer_clear();
                         layer_on(WIN_BASE);
                     } else {
-                        i3_bool = false;
-                        layer_clear();
-                        layer_on(WIN_BASE);
                     }
-                    return false;  // Skip all further processing of this key
+                    break;
                 default:
                     if (record->event.pressed) {							//When key is pressed
                         i3_returnlayer = true;
                     } else {
+                        // release is handled on the next call of process_record_user
                     }
                     break;
             }
@@ -415,7 +415,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_clear();
                 layer_on(WIN_BASE);
                 i3_bool = true;
-                key_timer = timer_read();
             } else {
             }
             return false;
