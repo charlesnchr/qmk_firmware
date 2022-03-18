@@ -50,6 +50,8 @@ enum custom_keycodes {
     eur,
     i3,
     i3ws,
+    i3nav,
+    i3apps,
     endash,
     emdash,
 };
@@ -82,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,  KC_RBRC,   KC_BSLS,          LGUI(LALT(KC_H)),
         LCTL_T(KC_ESC),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,   KC_ENT,           LGUI(LALT(KC_L)),
         KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,             RSFT_T(KC_F13),          KC_UP,
-        LT(_FN4, KC_F13), KC_LGUI, LALT_T(KC_F13),                            LT(_spcfn,KC_SPC),                             RCTL_T(KC_F13), LT(_FN4, KC_F13), MO(_FN3), KC_LEFT, KC_DOWN, KC_RGHT),
+        LGUI_T(KC_F13), LT(_FN4, KC_F13), LALT_T(KC_F13),                            LT(_spcfn,KC_SPC),                             RCTL_T(KC_F13), LT(_FN4, KC_F13), MO(_FN3), KC_LEFT, KC_DOWN, KC_RGHT),
 
     [_FN1] = LAYOUT_all(
         KC_GRV,  KC_BRID, KC_BRIU, KC_MCTL, KC_LPAD, RGB_VAD, RGB_VAI, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD,  KC_VOLU,   KC_TRNS,          KC_VOLD, KC_MUTE, KC_VOLU,
@@ -137,10 +139,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_spcfn] = LAYOUT_all(
             KC_ESC,   S(KC_1),    S(KC_2),    S(KC_3),    S(KC_4),    S(KC_5),    S(KC_6),    S(KC_7),    S(KC_8),    S(KC_9),    S(KC_0),  S(KC_MINS),  S(KC_EQL),  LCTL(KC_BSPC), KC_VOLD, KC_MUTE, KC_VOLU,
-            KC_HOME,  LGUI(KC_Q), LCTL(KC_W), KC_END, LGUI(KC_R), LCTL(KC_T), LGUI(KC_ENT), LCTL(KC_U), LCTL(KC_D), LCTL(KC_6), KC_PGUP, KC_PGDN, LCTL(KC_DEL), KC_DEL, LGUI(LSFT(KC_H)),
+            KC_HOME,  LGUI(KC_Q), LCTL(KC_W), KC_END, i3nav, LCTL(KC_T), i3apps, LCTL(KC_U), LCTL(KC_D), LCTL(KC_6), KC_PGUP, KC_PGDN, LCTL(KC_DEL), KC_DEL, LGUI(LSFT(KC_H)),
             _______,       LCTL(KC_1), LCTL(KC_2), LCTL(KC_3), i3, i3ws, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, LGUI(LCTL(KC_H)), LGUI(LCTL(KC_L)), LGUI(KC_ENT), LGUI(LSFT(KC_L)),
             _______,            KC_SPC, LCTL(KC_PGUP), LCTL(KC_PGDN),LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_LEFT), LCTL(KC_RGHT), LGUI(KC_H), LGUI(KC_L), LGUI(KC_B), LGUI(LSFT(KC_ENT)), _______,
-            MO(_mouse),   OSL(_spcfn),   _______,                      KC_SPC,                              MO(_mouse),   MO(_rgb),   _______,   _______,   _______,   _______
+            MO(_mouse),   _______,   _______,                      KC_SPC,                              MO(_mouse),   MO(_rgb),   _______,   _______,   _______,   _______
             ),
     [_spcfnMac] = LAYOUT_all(
             KC_ESC,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL, KC_VOLD, KC_MUTE, KC_VOLU,
@@ -400,6 +402,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_A);
                 layer_clear();
                 layer_on(WIN_BASE);
+                i3_bool = true; // to reset layer after next click
+            } else {
+            }
+            return false;
+            break;
+        case i3nav:
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                register_code(KC_R);
+                unregister_code(KC_LGUI);
+                unregister_code(KC_R);
+                layer_clear();
+                layer_on(WIN_BASE);
+                i3_bool = true;
+            } else {
+            }
+            return false;
+            break;
+        case i3apps:
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                register_code(KC_Y);
+                unregister_code(KC_LGUI);
+                unregister_code(KC_Y);
+                layer_clear();
+                layer_on(WIN_BASE);
+                i3_bool = true;
             } else {
             }
             return false;
