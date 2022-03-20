@@ -15,6 +15,7 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "print.h"
 
 enum layers {
     MAC_BASE,
@@ -59,6 +60,7 @@ enum custom_keycodes {
     i3apps,
     i3moveto,
     i3bringto,
+    i3layer,
     endash,
     emdash,
 };
@@ -161,8 +163,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_FN_i3] = LAYOUT_all(
         TO(WIN_BASE),  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
-        KC_TAB,  LGUI(KC_F),    LAG(KC_H),    LAG(KC_L),    OSL(_FN_i3bring),    KC_T,    KC_Y,    KC_PGUP,    KC_PGDN,    OSL(_FN_i3move),    KC_P,    KC_LBRC,  KC_RBRC,   KC_BSLS,          LGUI(LALT(KC_H)),
-        LCTL_T(KC_ESC),   LCTL(LGUI(KC_H)),    LCTL(LGUI(KC_L)),    OSL(_FN_i3_shift),    KC_F,    KC_G,    LGUI(KC_H),    LGUI(KC_J),    LGUI(KC_K),    LGUI(KC_L),    KC_SCLN,  KC_QUOT,   LGUI(KC_F),           LGUI(LALT(KC_L)),
+        KC_TAB,  LGUI(KC_F),    LAG(KC_L),    OSL(_FN_i3bring),    KC_R,    KC_T,    KC_Y,    KC_PGUP,    KC_PGDN,    OSL(_FN_i3move),    KC_P,    KC_LBRC,  KC_RBRC,   KC_BSLS,          LGUI(LALT(KC_H)),
+        LAG(KC_H),   LCTL(LGUI(KC_H)),    LCTL(LGUI(KC_L)),    OSL(_FN_i3_shift),    i3layer,    KC_G,    LGUI(KC_H),    LGUI(KC_J),    LGUI(KC_K),    LGUI(KC_L),    KC_SCLN,  KC_QUOT,   LGUI(KC_F),           LGUI(LALT(KC_L)),
         KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    LCAG(KC_B),    LCAG(KC_N),    LCAG(KC_M),    LCAG(KC_COMM), LCAG(KC_DOT),  KC_SLSH,             RSFT_T(KC_F13),          KC_UP,
         LGUI_T(KC_F13), KC_LGUI, LALT_T(KC_F13),                            LT(_spcfn,KC_SPC),                             RCTL_T(KC_F13), LT(_FN4, KC_F13), MO(_FN3), KC_LEFT, KC_DOWN, KC_RGHT),
 
@@ -199,7 +201,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_FN_i3move] = LAYOUT_all(
             KC_ESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9, _______, _______,  _______, _______, _______,  _______, _______,
-            KC_TAB, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
+            LSG(KC_B), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
             LCTL_T(KC_ESC), LSG(KC_1),    LSG(KC_2),    LSG(KC_3),    LSG(KC_4),    LSG(KC_5),    LSG(KC_6),    LSG(KC_7),    LSG(KC_8),    LSG(KC_9), _______, _______,          _______, _______,
             KC_LSFT,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_UP, _______,
             KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPACE,                            KC_RALT, MO(_rgb), _______, _______, _______, _______
@@ -207,7 +209,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_FN_i3bring] = LAYOUT_all(
             KC_ESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9, _______, _______,  _______, _______, _______,  _______, _______,
-            KC_TAB, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
+            LAG(KC_B), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
             LCTL_T(KC_ESC), LAG(KC_1),    LAG(KC_2),    LAG(KC_3),    LAG(KC_4),    LAG(KC_5),    LAG(KC_6),    LAG(KC_7),    LAG(KC_8),    LAG(KC_9), _______, _______,          _______, _______,
             KC_LSFT,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_UP, _______,
             KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPACE,                            KC_RALT, MO(_rgb), _______, _______, _______, _______
@@ -260,9 +262,45 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #endif
 
 bool i3_bool = false;											//Global repeat variable
+bool i3layer_used = false;											//Global repeat variable
+bool i3layer_btn_released = false;											//Global repeat variable
 bool i3_returnlayer = false;											//Global repeat variable
+/* static uint16_t key_timer; */
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+    if(layer_state_is(_FN_i3)) {
+
+        /* if (i3layer_btn_released && timer_read() - key_timer > 1000) { */
+        /*     layer_off(_FN_i3); */
+        /*     i3layer_used = false; */
+        /*     i3layer_btn_released = false; */
+        /* } */
+        if (i3layer_btn_released && i3layer_used) {
+            layer_off(_FN_i3);
+            i3layer_used = false;
+            i3layer_btn_released = false;
+        }
+
+        switch (keycode) {
+            case i3layer:
+                if (record->event.pressed) {							//When key is pressed
+                    layer_on(_FN_i3);
+                    i3layer_btn_released = false;
+                    i3layer_used = false;
+                    /* key_timer = timer_read(); */
+                } else {
+                    i3layer_btn_released = true;
+                }
+                return true;
+            default:
+                if (record->event.pressed) {							//When key is pressed
+                    i3layer_used = true;
+                } else {
+                }
+                break;
+        }
+    }
 
     if (i3_returnlayer) {
         switch (keycode) {
@@ -442,12 +480,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case i3layer:
             if (record->event.pressed) {
-                layer_clear();
-                layer_on(i3layer);
+                layer_on(_FN_i3);
+                i3layer_used = false;
+                i3layer_btn_released = false;
+                /* key_timer = timer_read(); */
                 // currently interferes with OSL functionality, not sure why
                 /* i3_bool = true; // to reset layer after next click */
             } else {
+                i3layer_btn_released = true;
             }
+            return false;
+            break;
         case i3:
             if (record->event.pressed) {
                 register_code(KC_LGUI);
@@ -456,8 +499,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_R);
                 layer_clear();
                 layer_on(WIN_BASE);
-                // currently interferes with OSL functionality, not sure why
-                /* i3_bool = true; // to reset layer after next click */
+                i3_bool = true;
             } else {
             }
             return false;
@@ -483,7 +525,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_Y);
                 layer_clear();
                 layer_on(WIN_BASE);
-                /* i3_bool = true; */
+                i3_bool = true;
             } else {
             }
             return false;
