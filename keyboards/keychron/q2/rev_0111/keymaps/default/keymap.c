@@ -28,6 +28,11 @@ enum layers {
     _colemak,
     _spcfn,
     _spcfnMac,
+    _FN_i3,
+    _FN_i3_shift,
+    _FN_i3ws,
+    _FN_i3move,
+    _FN_i3bring,
     _rgb,
     _mouse
 };
@@ -52,6 +57,8 @@ enum custom_keycodes {
     i3ws,
     i3nav,
     i3apps,
+    i3moveto,
+    i3bringto,
     endash,
     emdash,
 };
@@ -84,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,  KC_RBRC,   KC_BSLS,          LGUI(LALT(KC_H)),
         LCTL_T(KC_ESC),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,   KC_ENT,           LGUI(LALT(KC_L)),
         KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,             RSFT_T(KC_F13),          KC_UP,
-        LGUI_T(KC_F13), LT(_FN4, KC_F13), LALT_T(KC_F13),                            LT(_spcfn,KC_SPC),                             RCTL_T(KC_F13), LT(_FN4, KC_F13), MO(_FN3), KC_LEFT, KC_DOWN, KC_RGHT),
+        LT(_FN4,KC_F13), KC_LGUI, LALT_T(KC_F13),                            LT(_spcfn,KC_SPC),                             RCTL_T(KC_F13), LT(_FN4, KC_F13), MO(_FN3), KC_LEFT, KC_DOWN, KC_RGHT),
 
     [_FN1] = LAYOUT_all(
         KC_GRV,  KC_BRID, KC_BRIU, KC_MCTL, KC_LPAD, RGB_VAD, RGB_VAI, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD,  KC_VOLU,   KC_TRNS,          KC_VOLD, KC_MUTE, KC_VOLU,
@@ -139,9 +146,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_spcfn] = LAYOUT_all(
             KC_ESC,   S(KC_1),    S(KC_2),    S(KC_3),    S(KC_4),    S(KC_5),    S(KC_6),    S(KC_7),    S(KC_8),    S(KC_9),    S(KC_0),  S(KC_MINS),  S(KC_EQL),  LCTL(KC_BSPC), KC_VOLD, KC_MUTE, KC_VOLU,
-            KC_HOME,  LGUI(KC_Q), LCTL(KC_W), KC_END, i3nav, LCTL(KC_T), i3apps, LCTL(KC_U), LCTL(KC_D), LCTL(KC_6), KC_PGUP, KC_PGDN, LCTL(KC_DEL), KC_DEL, LGUI(LSFT(KC_H)),
-            _______,       LCTL(KC_1), LCTL(KC_2), LCTL(KC_3), i3, i3ws, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, LGUI(LCTL(KC_H)), LGUI(LCTL(KC_L)), LGUI(KC_ENT), LGUI(LSFT(KC_L)),
-            _______,            KC_SPC, LCTL(KC_PGUP), LCTL(KC_PGDN),LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_LEFT), LCTL(KC_RGHT), LGUI(KC_H), LGUI(KC_L), LGUI(KC_B), LGUI(LSFT(KC_ENT)), _______,
+            LGUI(KC_B),  LGUI(KC_Q), LCTL(KC_W), KC_END, i3, LCTL(KC_T), i3apps, LCTL(KC_U), LCTL(KC_D), LCTL(KC_6), KC_HOME, S(KC_LBRC), S(KC_RBRC), KC_DEL, LGUI(LSFT(KC_H)),
+            _______,       LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), i3layer, OSL(_FN_i3ws), KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, LGUI(LCTL(KC_H)), LGUI(LCTL(KC_L)), LGUI(KC_ENT), LGUI(LSFT(KC_L)),
+            _______,            KC_SPC, LCTL(KC_PGUP), LCTL(KC_PGDN),LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_LEFT), LCTL(KC_RGHT), LGUI(KC_H), LGUI(KC_L), LGUI(KC_B), LGUI(LALT(KC_ENT)), _______,
             MO(_mouse),   _______,   _______,                      KC_SPC,                              MO(_mouse),   MO(_rgb),   _______,   _______,   _______,   _______
             ),
     [_spcfnMac] = LAYOUT_all(
@@ -151,6 +158,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             _______,            KC_SPC, LALT(KC_LCBR), LALT(KC_RCBR), LALT(KC_LBRC), LALT(KC_RBRC), LGUI(KC_LEFT), LGUI(KC_RIGHT), KC_VOLD, KC_VOLU, KC_MPRV, KC_MNXT, _______,
             MO(_mouse),   _______,   _______,                      KC_SPC,                              MO(_mouse),   MO(_rgb),   _______,   _______,   _______,   _______
             ),
+
+    [_FN_i3] = LAYOUT_all(
+        TO(WIN_BASE),  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
+        KC_TAB,  LGUI(KC_F),    LAG(KC_H),    LAG(KC_L),    OSL(_FN_i3bring),    KC_T,    KC_Y,    KC_PGUP,    KC_PGDN,    OSL(_FN_i3move),    KC_P,    KC_LBRC,  KC_RBRC,   KC_BSLS,          LGUI(LALT(KC_H)),
+        LCTL_T(KC_ESC),   LCTL(LGUI(KC_H)),    LCTL(LGUI(KC_L)),    OSL(_FN_i3_shift),    KC_F,    KC_G,    LGUI(KC_H),    LGUI(KC_J),    LGUI(KC_K),    LGUI(KC_L),    KC_SCLN,  KC_QUOT,   LGUI(KC_F),           LGUI(LALT(KC_L)),
+        KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    LCAG(KC_B),    LCAG(KC_N),    LCAG(KC_M),    LCAG(KC_COMM), LCAG(KC_DOT),  KC_SLSH,             RSFT_T(KC_F13),          KC_UP,
+        LGUI_T(KC_F13), KC_LGUI, LALT_T(KC_F13),                            LT(_spcfn,KC_SPC),                             RCTL_T(KC_F13), LT(_FN4, KC_F13), MO(_FN3), KC_LEFT, KC_DOWN, KC_RGHT),
+
+    [_FN_i3_shift] = LAYOUT_all(
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,  KC_RBRC,   KC_BSLS,          LGUI(LALT(KC_H)),
+        LCTL_T(KC_ESC),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LGUI(LSFT(KC_H)),    LGUI(LSFT(KC_J)),    LGUI(LSFT(KC_K)),    LGUI(LSFT(KC_L)),    KC_SCLN,  KC_QUOT,   KC_ENT,           LGUI(LALT(KC_L)),
+        KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    HYPR(KC_N),    HYPR(KC_M),    HYPR(KC_COMM), HYPR(KC_DOT),  KC_SLSH,             RSFT_T(KC_F13),          KC_UP,
+        LGUI_T(KC_F13), KC_LGUI, LALT_T(KC_F13),                            LT(_spcfn,KC_SPC),                             RCTL_T(KC_F13), LT(_FN4, KC_F13), MO(_FN3), KC_LEFT, KC_DOWN, KC_RGHT),
+
     [_rgb] = LAYOUT_all(
             RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_VOLD, KC_MUTE, KC_VOLU,
             _______,     RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, _______, _______, _______, _______,
@@ -158,13 +180,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             _______,            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
             qwerty, colemak, gamer,                      _______,                              _______,   _______,   _______,   _______,   _______,   _______
             ),
+
     [_mouse] = LAYOUT_all(
             KC_ESC,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,  _______,  _______,  _______, KC_VOLD, KC_MUTE, KC_VOLU,
             _______,     KC_BTN1, KC_MS_UP, KC_BTN2, KC_WH_U, KC_WH_L, _______, _______, _______, _______, _______, _______, _______, _______, _______,
             KC_BTN1,       KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_WH_D, KC_WH_R, _______, _______, _______, _______, _______, _______, _______, _______,
             _______,            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
             _______,   _______,   _______,                      KC_SPC,                              _______,   _______,   _______,   _______,   _______,   _______
+            ),
+
+    [_FN_i3ws] = LAYOUT_all(
+            KC_ESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9, _______, _______,  _______, _______, _______,  _______, _______,
+            KC_TAB, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
+            LCTL_T(KC_ESC), LGUI(KC_1),    LGUI(KC_2),    LGUI(KC_3),    LGUI(KC_4),    LGUI(KC_5),    LGUI(KC_6),    LGUI(KC_7),    LGUI(KC_8),    LGUI(KC_9), _______, _______,          _______, _______,
+            KC_LSFT,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_UP, _______,
+            KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPACE,                            KC_RALT, MO(_rgb), _______, _______, _______, _______
+            ),
+
+    [_FN_i3move] = LAYOUT_all(
+            KC_ESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9, _______, _______,  _______, _______, _______,  _______, _______,
+            KC_TAB, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
+            LCTL_T(KC_ESC), LSG(KC_1),    LSG(KC_2),    LSG(KC_3),    LSG(KC_4),    LSG(KC_5),    LSG(KC_6),    LSG(KC_7),    LSG(KC_8),    LSG(KC_9), _______, _______,          _______, _______,
+            KC_LSFT,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_UP, _______,
+            KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPACE,                            KC_RALT, MO(_rgb), _______, _______, _______, _______
+            ),
+
+    [_FN_i3bring] = LAYOUT_all(
+            KC_ESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9, _______, _______,  _______, _______, _______,  _______, _______,
+            KC_TAB, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
+            LCTL_T(KC_ESC), LAG(KC_1),    LAG(KC_2),    LAG(KC_3),    LAG(KC_4),    LAG(KC_5),    LAG(KC_6),    LAG(KC_7),    LAG(KC_8),    LAG(KC_9), _______, _______,          _______, _______,
+            KC_LSFT,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_UP, _______,
+            KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPACE,                            KC_RALT, MO(_rgb), _______, _______, _______, _______
             )
+
 };
 
 #if defined(VIA_ENABLE) && defined(ENCODER_ENABLE)
@@ -392,22 +440,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
             break;
-        case i3:
+        case i3layer:
             if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LSFT);
-                register_code(KC_A);
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LSFT);
-                unregister_code(KC_A);
                 layer_clear();
-                layer_on(WIN_BASE);
-                i3_bool = true; // to reset layer after next click
+                layer_on(i3layer);
+                // currently interferes with OSL functionality, not sure why
+                /* i3_bool = true; // to reset layer after next click */
             } else {
             }
-            return false;
-            break;
-        case i3nav:
+        case i3:
             if (record->event.pressed) {
                 register_code(KC_LGUI);
                 register_code(KC_R);
@@ -415,11 +456,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_R);
                 layer_clear();
                 layer_on(WIN_BASE);
-                i3_bool = true;
+                // currently interferes with OSL functionality, not sure why
+                /* i3_bool = true; // to reset layer after next click */
             } else {
             }
             return false;
             break;
+        /* case i3nav: */
+        /*     if (record->event.pressed) { */
+        /*         register_code(KC_LGUI); */
+        /*         register_code(KC_R); */
+        /*         unregister_code(KC_LGUI); */
+        /*         unregister_code(KC_R); */
+        /*         layer_clear(); */
+        /*         layer_on(WIN_BASE); */
+        /*         i3_bool = true; */
+        /*     } else { */
+        /*     } */
+        /*     return false; */
+        /*     break; */
         case i3apps:
             if (record->event.pressed) {
                 register_code(KC_LGUI);
@@ -428,26 +483,61 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_Y);
                 layer_clear();
                 layer_on(WIN_BASE);
-                i3_bool = true;
+                /* i3_bool = true; */
             } else {
             }
             return false;
             break;
-        case i3ws:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LSFT);
-                register_code(KC_TAB);
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LSFT);
-                unregister_code(KC_TAB);
-                layer_clear();
-                layer_on(WIN_BASE);
-                i3_bool = true;
-            } else {
-            }
-            return false;
-            break;
+        /* case i3ws: */
+        /*     if (record->event.pressed) { */
+        /*         register_code(KC_LGUI); */
+        /*         register_code(KC_LSFT); */
+        /*         register_code(KC_TAB); */
+        /*         unregister_code(KC_LGUI); */
+        /*         unregister_code(KC_LSFT); */
+        /*         unregister_code(KC_TAB); */
+        /*         layer_on(WIN_BASE); */
+        /*         set_oneshot_layer(WIN_BASE, ONESHOT_START); */
+        /*         clear_oneshot_layer_state(ONESHOT_PRESSED); */
+        /*     } else { */
+        /*     } */
+        /*     return false; */
+        /*     break; */
+        /* case i3bringto: */
+        /*     if (record->event.pressed) { */
+        /*         register_code(KC_LGUI); */
+        /*         register_code(KC_LCTL); */
+        /*         register_code(KC_LALT); */
+        /*         register_code(KC_R); */
+        /*         unregister_code(KC_LGUI); */
+        /*         unregister_code(KC_LCTL); */
+        /*         unregister_code(KC_LALT); */
+        /*         unregister_code(KC_R); */
+        /*         layer_clear(); */
+        /*         layer_on(WIN_BASE); */
+
+        /*         i3_bool = true; */
+        /*     } else { */
+        /*     } */
+        /*     return false; */
+        /*     break; */
+        /* case i3moveto: */
+        /*     if (record->event.pressed) { */
+        /*         register_code(KC_LGUI); */
+        /*         register_code(KC_LCTL); */
+        /*         register_code(KC_LALT); */
+        /*         register_code(KC_O); */
+        /*         unregister_code(KC_LGUI); */
+        /*         unregister_code(KC_LCTL); */
+        /*         unregister_code(KC_LALT); */
+        /*         unregister_code(KC_O); */
+        /*         layer_clear(); */
+        /*         layer_on(WIN_BASE); */
+        /*         i3_bool = true; */
+        /*     } else { */
+        /*     } */
+        /*     return false; */
+        /*     break; */
         default:
             return true;  // Process all other keycodes normally
     }
