@@ -8,3 +8,5 @@
 /* #define LEADER_TIMEOUT 300 */
 /* #define TAPPING_TERM 175 */
 /* #define COMBO_COUNT 4 */
+#define TAPPING_FORCE_HOLD
+#define ONESHOT_TIMEOUT 500
