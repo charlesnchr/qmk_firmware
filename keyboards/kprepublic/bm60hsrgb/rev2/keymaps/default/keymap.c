@@ -26,6 +26,7 @@ enum layers {
     _spcfn,
     _spcfnMac,
     _FN_i3,
+    _FN_i3_r,
     _FN_i3_shift,
     _FN_i3ws,
     _FN_i3move,
@@ -153,6 +154,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_FN_i3] = LAYOUT_60_ansi_arrow(
         TO(_qwerty),  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSPC,
         KC_TAB,  LGUI(KC_F),    KC_W,    OSL(_FN_i3bring),    LCAG(KC_R),    KC_T,    KC_Y,    KC_PGUP,    KC_PGDN,    OSL(_FN_i3move),    LCAG(KC_1),    KC_LBRC,  KC_RBRC,   KC_BSLS,
+        LCTL_T(KC_ESC),   LCTL(LGUI(KC_H)),    LCTL(LGUI(KC_L)),    OSL(_FN_i3_shift),    i3layer,    KC_G,    LGUI(KC_H),    LGUI(KC_J),    LGUI(KC_K),    LGUI(KC_L),    LAG(KC_H),  LAG(KC_L),   LGUI(KC_F),
+        KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    LCAG(KC_N),    LCAG(KC_M),    LCAG(KC_COMM), LCAG(KC_DOT),  KC_SLSH,             LCAG(KC_1), _______,
+        LGUI_T(KC_F13), KC_LGUI, LALT_T(KC_F13),                            LT(_spcfn,KC_SPC),                             RCTL_T(KC_F13), LT(_FN4, KC_F13), KC_LEFT, KC_DOWN, KC_RGHT
+        ),
+
+    [_FN_i3_r] = LAYOUT_60_ansi_arrow(
+        TO(_qwerty),  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSPC,
+        KC_TAB,  LGUI(KC_F),    KC_W,    LAG(KC_E),    LCAG(KC_R),    KC_T,    KC_Y,    KC_PGUP,    KC_PGDN,    OSL(_FN_i3move),    LCAG(KC_1),    KC_LBRC,  KC_RBRC,   KC_BSLS,
         LCTL_T(KC_ESC),   LCTL(LGUI(KC_H)),    LCTL(LGUI(KC_L)),    OSL(_FN_i3_shift),    i3layer,    KC_G,    LGUI(KC_H),    LGUI(KC_J),    LGUI(KC_K),    LGUI(KC_L),    LAG(KC_H),  LAG(KC_L),   LGUI(KC_F),
         KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    LCAG(KC_N),    LCAG(KC_M),    LCAG(KC_COMM), LCAG(KC_DOT),  KC_SLSH,             LCAG(KC_1), _______,
         LGUI_T(KC_F13), KC_LGUI, LALT_T(KC_F13),                            LT(_spcfn,KC_SPC),                             RCTL_T(KC_F13), LT(_FN4, KC_F13), KC_LEFT, KC_DOWN, KC_RGHT
