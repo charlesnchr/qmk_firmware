@@ -103,10 +103,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             ),
 
     [_spcfn] = LAYOUT_all(
-            KC_ESC,   S(KC_1),    S(KC_2),    S(KC_3),    S(KC_4),    S(KC_5),    S(KC_6),    S(KC_7),    S(KC_8),    S(KC_9),    S(KC_0),  S(KC_MINS),  S(KC_EQL),  LCTL(KC_BSPC), KC_VOLD, KC_MUTE, KC_VOLU,
-            LGUI(KC_B),  LGUI(KC_Q), LCTL(KC_W), KC_END, OSL(_FN_i3_r), LCTL(KC_T), OSL(_FN_i3_y), LCTL(KC_U), LCTL(KC_D), LCTL(KC_6), KC_HOME, S(KC_LBRC), S(KC_RBRC), KC_DEL, LGUI(LSFT(KC_H)),
+            KC_ESC,   S(KC_1),    S(KC_2),    S(KC_3),    S(KC_4),    S(KC_5),    S(KC_6),    S(KC_7),    S(KC_8),    S(KC_9),    S(KC_0),  S(KC_MINS),  S(KC_EQL),  LCTL(KC_BSPC), KC_MPRV, KC_MUTE, KC_MNXT,
+            LGUI(KC_TAB),  LGUI(KC_Q), LCTL(KC_W), KC_END, OSL(_FN_i3_r), LCTL(KC_T), OSL(_FN_i3_y), LCTL(KC_U), LCTL(KC_D), LCTL(KC_6), KC_HOME, S(KC_LBRC), S(KC_RBRC), KC_DEL, LGUI(LSFT(KC_H)),
             _______,       HYPR(KC_1), HYPR(KC_2), HYPR(KC_3), i3layer, OSL(_FN_i3ws), KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, LGUI(LCTL(KC_H)), LGUI(LCTL(KC_L)), LGUI(KC_ENT), LGUI(LSFT(KC_L)),
-            _______,            KC_SPC, LCTL(KC_PGUP), LCTL(KC_PGDN),LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_LEFT), LCTL(KC_RGHT), LGUI(KC_H), LGUI(KC_L), LGUI(KC_B), LGUI(LALT(KC_ENT)), LGUI(LSFT(KC_UP)),
+            _______,            KC_SPC, LCTL(KC_PGUP), LCTL(KC_PGDN),LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_LEFT), LCTL(KC_RGHT), LCAG(KC_J), LCAG(KC_K), OSL(_FN_i3ws), LGUI(LALT(KC_ENT)), LGUI(LSFT(KC_UP)),
             MO(_mouse),   _______,   _______,                      KC_SPC,                              MO(_mouse),   MO(_rgb),   _______,   LGUI(LSFT(KC_LEFT)),   LGUI(LSFT(KC_DOWN)),   LGUI(LSFT(KC_RIGHT))
             ),
 
@@ -127,15 +127,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ),
 
     [_FN_i3_r] = LAYOUT_all(
-        TO(WIN_BASE),  LCAG(KC_1),    LCAG(KC_2),    LCAG(KC_3),    LCAG(KC_4),    LCAG(KC_5),    LCAG(KC_6),    LCAG(KC_7),    LCAG(KC_8),    LCAG(KC_9),    LCAG(KC_0),    KC_MINS,  KC_EQL,    KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
-        KC_TAB,  KC_Q,    LCAG(KC_W),    LCAG(KC_E),    LCAG(KC_R),    LCAG(KC_T),    LCAG(KC_Y),    LCAG(KC_U),    LCAG(KC_I),    LCAG(KC_O),    LCAG(KC_P),    KC_LBRC,  KC_RBRC,   KC_BSLS,          LGUI(LALT(KC_H)),
+        TO(WIN_BASE),  LCAG(KC_1),    LCAG(KC_2),    LCAG(KC_3),    LCAG(KC_4),    LCAG(KC_5),    LCAG(KC_6),    LCAG(KC_7),    LCAG(KC_8),    LCAG(KC_9),    LCAG(KC_0),    LCAG(KC_MINS),  LCAG(KC_EQL),    LCAG(KC_BSPC),          KC_VOLD, KC_MPLY, KC_VOLU,
+        KC_TAB,  KC_Q,    LCAG(KC_W),    LCAG(KC_E),    LCAG(KC_R),    LCAG(KC_T),    LCAG(KC_Y),    LCAG(KC_U),    LCAG(KC_I),    LCAG(KC_O),    LCAG(KC_P),    LCAG(KC_LBRC),  LCAG(KC_RBRC),   LCAG(KC_BSLS),          LGUI(LALT(KC_H)),
         LCTL_T(KC_ESC),   LCAG(KC_A),    LCAG(KC_S),    LCAG(KC_D),    LCAG(KC_F),    LCAG(KC_G),    LCAG(KC_H),    LCAG(KC_J),    LCAG(KC_K),    LCAG(KC_L),    LCAG(KC_SCLN),  KC_QUOT,   KC_ENT,           LGUI(LALT(KC_L)),
         KC_LSFT,          LCAG(KC_Z),    LCAG(KC_X),    LCAG(KC_C),    LCAG(KC_V),    LCAG(KC_B),    LCAG(KC_N),    LCAG(KC_M),    LCAG(KC_COMM), LCAG(KC_DOT),  LCAG(KC_SLSH),             KC_RSFT,          LAG(KC_UP),
         MO(_FN4), KC_LGUI, KC_LALT,                            LT(_spcfn,KC_SPC),                             KC_RCTL, MO(_FN4), MO(_FN_i3), LAG(KC_LEFT), LAG(KC_DOWN), LAG(KC_RGHT)),
 
     [_FN_i3_y] = LAYOUT_all(
         TO(WIN_BASE),  HYPR(KC_1),    HYPR(KC_2),    HYPR(KC_3),    HYPR(KC_4),    HYPR(KC_5),    HYPR(KC_6),    HYPR(KC_7),    HYPR(KC_8),    HYPR(KC_9),    HYPR(KC_0),    KC_MINS,  KC_EQL,    KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
-        KC_TAB,  KC_Q,    HYPR(KC_W),    HYPR(KC_E),    HYPR(KC_R),    HYPR(KC_T),    HYPR(KC_Y),    HYPR(KC_U),    HYPR(KC_I),    HYPR(KC_O),    HYPR(KC_P),    KC_LBRC,  KC_RBRC,   KC_BSLS,          LGUI(LALT(KC_H)),
+        KC_TAB,  KC_Q,    HYPR(KC_W),    HYPR(KC_E),    HYPR(KC_R),    HYPR(KC_T),    HYPR(KC_Y),    HYPR(KC_U),    HYPR(KC_I),    HYPR(KC_O),    HYPR(KC_P),    HYPR(KC_LBRC),  HYPR(KC_RBRC),   HYPR(KC_BSLS),          LGUI(LALT(KC_H)),
         LCTL_T(KC_ESC),   HYPR(KC_A),    HYPR(KC_S),    HYPR(KC_D),    HYPR(KC_F),    HYPR(KC_G),    HYPR(KC_H),    HYPR(KC_J),    HYPR(KC_K),    HYPR(KC_L),    HYPR(KC_SCLN),  KC_QUOT,   KC_ENT,           LGUI(LALT(KC_L)),
         KC_LSFT,          HYPR(KC_Z),    HYPR(KC_X),    HYPR(KC_C),    HYPR(KC_V),    HYPR(KC_B),    HYPR(KC_N),    HYPR(KC_M),    HYPR(KC_COMM), HYPR(KC_DOT),  HYPR(KC_SLSH),             KC_RSFT,          KC_UP,
         MO(_FN4), KC_LGUI, KC_LALT,                            LT(_spcfn,KC_SPC),                             KC_RCTL, MO(_FN4), MO(_FN_i3), KC_LEFT, KC_DOWN, KC_RGHT),
