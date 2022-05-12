@@ -14,6 +14,7 @@
 enum layers {
     MAC_BASE,
     WIN_BASE,
+    _MAC_FN4,
     _FN4,
     _FN5,
     _gamer,
@@ -67,11 +68,11 @@ combo_t key_combos[COMBO_COUNT] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_all(
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,   KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,  KC_RBRC,  KC_BSLS,          KC_DEL,
-        LCTL_T(KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,            KC_ENT,           KC_HOME,
-        KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,            KC_RSFT, KC_UP,
-        LT(_FN4,KC_F13), KC_LOPT, KC_LCMD,                            LT(_spcfnMac,KC_SPC),                             KC_RCMD, MO(_FN4), MO(_FN_i3), KC_LEFT, KC_DOWN, KC_RGHT),
+        KC_NUBS,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,  KC_RBRC,   KC_BSLS,          LGUI(LALT(KC_H)),
+        LCTL_T(KC_ESC),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,   KC_ENT,           LGUI(LALT(KC_L)),
+        KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,             KC_RSFT,          KC_UP,
+        MO(_MAC_FN4), KC_LALT, KC_LGUI,                            KC_SPC,                             KC_RCTL, MO(_MAC_FN4), MO(_FN_i3), KC_LEFT, KC_DOWN, KC_RGHT),
 
     [WIN_BASE] = LAYOUT_all(
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
@@ -80,12 +81,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,             KC_RSFT,          KC_UP,
         MO(_FN4), KC_LGUI, KC_LALT,                            LT(_spcfn,KC_SPC),                             KC_RCTL, MO(_FN4), MO(_FN_i3), KC_LEFT, KC_DOWN, KC_RGHT),
 
+    [_MAC_FN4] = LAYOUT_all(
+        KC_WAVE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12,    RESET,          KC_VOLD, KC_MUTE, KC_VOLU,
+        RGB_TOG,  KC_BTN1, KC_MS_UP, KC_BTN2, KC_WH_U, KC_WH_L, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LALT(KC_A),  KC_TRNS, KC_TRNS,          KC_TRNS,
+        KC_BTN1,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_WH_D, KC_WH_R, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LALT(KC_QUOT), LALT(KC_O),      KC_MPLY,          KC_TRNS,
+        MO(_FN5),          KC_INS, KC_APP, KC_RALT, KC_TRNS, KC_TRNS, endash, emdash, KC_VOLD, KC_VOLU, KC_MPRV, KC_MNXT, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS,                            KC_SPC,                            MO(_rgb), KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS),
+
     [_FN4] = LAYOUT_all(
         KC_WAVE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12,    RESET,          KC_VOLD, KC_MUTE, KC_VOLU,
         RGB_TOG,  KC_BTN1, KC_MS_UP, KC_BTN2, KC_WH_U, KC_WH_L, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, aa,  KC_TRNS, KC_TRNS,          KC_TRNS,
         KC_BTN1,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_WH_D, KC_WH_R, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, ae, oe,           KC_MPLY,          KC_TRNS,
         MO(_FN5),          KC_INS, KC_APP, KC_RALT, KC_TRNS, KC_TRNS, endash, emdash, KC_VOLD, KC_VOLU, KC_MPRV, KC_MNXT, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS,                            KC_SPC,                            KC_TRNS, KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS),
+        KC_TRNS, KC_TRNS, KC_TRNS,                            KC_SPC,                            MO(_rgb), KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS),
 
     [_FN5] = LAYOUT_all(
         KC_WAVE, KC_F1,   KC_F2,   pnd,   eur,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12,    RESET,          KC_VOLD, KC_MUTE, KC_VOLU,
@@ -111,11 +119,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             ),
 
     [_spcfnMac] = LAYOUT_all(
-            KC_ESC,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL, KC_VOLD, KC_MUTE, KC_VOLU,
-            LALT(KC_T),     _______, LALT(KC_W), _______, _______, _______, _______, _______, LCTL(KC_U), LCTL(KC_D), KC_HOME, KC_PGUP, KC_PGDN, KC_END, _______,
-            _______,       LCTL(KC_1), LCTL(KC_2), LCTL(KC_3), LCTL(KC_4), LCTL(KC_5), KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, _______, _______, KC_MPLY, _______,
-            _______,            KC_SPC, LALT(KC_LCBR), LALT(KC_RCBR), LALT(KC_LBRC), LALT(KC_RBRC), LGUI(KC_LEFT), LGUI(KC_RIGHT), KC_VOLD, KC_VOLU, KC_MPRV, KC_MNXT, _______,
-            MO(_mouse),   _______,   _______,                      KC_SPC,                              MO(_mouse),   MO(_rgb),   _______,   _______,   _______,   _______
+            KC_ESC,   S(KC_1),    S(KC_2),    S(KC_3),    S(KC_4),    S(KC_5),    S(KC_6),    S(KC_7),    S(KC_8),    S(KC_9),    S(KC_0),  S(KC_MINS),  S(KC_EQL),  LGUI(KC_BSPC), KC_VOLD, KC_MUTE, KC_VOLU,
+            LGUI(KC_B),  LALT(KC_Q), LALT(KC_W), KC_END, OSL(_FN_i3_r), LALT(KC_T), OSL(_FN_i3_y), LCTL(KC_U), LCTL(KC_D), LCTL(KC_6), KC_HOME, S(KC_LBRC), S(KC_RBRC), KC_DEL, LGUI(LSFT(KC_H)),
+            _______,       LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), i3layer, OSL(_FN_i3ws), KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, LGUI(LCTL(KC_H)), LGUI(LCTL(KC_L)), LGUI(KC_ENT), LGUI(LSFT(KC_L)),
+            _______,            KC_SPC, LALT(S(KC_LBRC)), LALT(S(KC_RBRC)), LALT(KC_LEFT), LALT(KC_RGHT), LGUI(KC_LEFT), LGUI(KC_RGHT), LGUI(KC_H), LGUI(KC_L), OSL(_FN_i3ws), LGUI(LALT(KC_ENT)), LGUI(LSFT(KC_UP)),
+            MO(_mouse),   _______,   _______,                      KC_SPC,                              MO(_mouse),   MO(_rgb),   _______,   LGUI(LSFT(KC_LEFT)),   LGUI(LSFT(KC_DOWN)),   LGUI(LSFT(KC_RIGHT))
             ),
 
     [_FN_i3] = LAYOUT_all(
@@ -131,21 +139,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    LCAG(KC_W),    LCAG(KC_E),    LCAG(KC_R),    LCAG(KC_T),    LCAG(KC_Y),    LCAG(KC_U),    LCAG(KC_I),    LCAG(KC_O),    LCAG(KC_P),    LCAG(KC_LBRC),  LCAG(KC_RBRC),   LCAG(KC_BSLS),          LGUI(LALT(KC_H)),
         LCTL_T(KC_ESC),   LCAG(KC_A),    LCAG(KC_S),    LCAG(KC_D),    LCAG(KC_F),    LCAG(KC_G),    LCAG(KC_H),    LCAG(KC_J),    LCAG(KC_K),    LCAG(KC_L),    LCAG(KC_SCLN),  KC_QUOT,   KC_ENT,           LGUI(LALT(KC_L)),
         KC_LSFT,          LCAG(KC_Z),    LCAG(KC_X),    LCAG(KC_C),    LCAG(KC_V),    LCAG(KC_B),    LCAG(KC_N),    LCAG(KC_M),    LCAG(KC_COMM), LCAG(KC_DOT),  LCAG(KC_SLSH),             KC_RSFT,          LAG(KC_UP),
-        MO(_FN4), KC_LGUI, KC_LALT,                            LT(_spcfn,KC_SPC),                             KC_RCTL, MO(_FN4), MO(_FN_i3), LAG(KC_LEFT), LAG(KC_DOWN), LAG(KC_RGHT)),
+        _______, KC_LGUI, KC_LALT,                            LT(_spcfn,KC_SPC),                             KC_RCTL, _______, MO(_FN_i3), LAG(KC_LEFT), LAG(KC_DOWN), LAG(KC_RGHT)),
 
     [_FN_i3_y] = LAYOUT_all(
         TO(WIN_BASE),  HYPR(KC_1),    HYPR(KC_2),    HYPR(KC_3),    HYPR(KC_4),    HYPR(KC_5),    HYPR(KC_6),    HYPR(KC_7),    HYPR(KC_8),    HYPR(KC_9),    HYPR(KC_0),    KC_MINS,  KC_EQL,    KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
         KC_TAB,  KC_Q,    HYPR(KC_W),    HYPR(KC_E),    HYPR(KC_R),    HYPR(KC_T),    HYPR(KC_Y),    HYPR(KC_U),    HYPR(KC_I),    HYPR(KC_O),    HYPR(KC_P),    HYPR(KC_LBRC),  HYPR(KC_RBRC),   HYPR(KC_BSLS),          LGUI(LALT(KC_H)),
         LCTL_T(KC_ESC),   HYPR(KC_A),    HYPR(KC_S),    HYPR(KC_D),    HYPR(KC_F),    HYPR(KC_G),    HYPR(KC_H),    HYPR(KC_J),    HYPR(KC_K),    HYPR(KC_L),    HYPR(KC_SCLN),  KC_QUOT,   KC_ENT,           LGUI(LALT(KC_L)),
         KC_LSFT,          HYPR(KC_Z),    HYPR(KC_X),    HYPR(KC_C),    HYPR(KC_V),    HYPR(KC_B),    HYPR(KC_N),    HYPR(KC_M),    HYPR(KC_COMM), HYPR(KC_DOT),  HYPR(KC_SLSH),             KC_RSFT,          KC_UP,
-        MO(_FN4), KC_LGUI, KC_LALT,                            LT(_spcfn,KC_SPC),                             KC_RCTL, MO(_FN4), MO(_FN_i3), KC_LEFT, KC_DOWN, KC_RGHT),
+        _______, KC_LGUI, KC_LALT,                            LT(_spcfn,KC_SPC),                             KC_RCTL, _______, MO(_FN_i3), KC_LEFT, KC_DOWN, KC_RGHT),
 
     [_FN_i3_shift] = LAYOUT_all(
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSPC,          KC_VOLD, KC_MPLY, KC_VOLU,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    LCAG(KC_4),    KC_LBRC,  KC_RBRC,   KC_BSLS,          LGUI(LALT(KC_H)),
         LCTL_T(KC_ESC),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    LGUI(LSFT(KC_H)),    LGUI(LSFT(KC_J)),    LGUI(LSFT(KC_K)),    LGUI(LSFT(KC_L)), LGUI(LSFT(KC_SCLN)),  LGUI(LSFT(KC_QUOT)),    LGUI(KC_F),       LGUI(LALT(KC_L)),
         KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    LGUI(LSFT(KC_N)),    LGUI(LSFT(KC_M)),    LGUI(LSFT(KC_COMM)), LGUI(LSFT(KC_DOT)),  LGUI(LSFT(KC_SLSH)),             LCAG(KC_4),          LGUI(LALT(LSFT(KC_UP))),
-        MO(_FN4), KC_LGUI, KC_LALT,                            LT(_spcfn,KC_SPC),                             KC_RCTL, MO(_FN4), MO(_FN_i3), LGUI(LALT(LSFT(KC_LEFT))), LGUI(LALT(LSFT(KC_DOWN))), LGUI(LALT(LSFT(KC_RGHT)))
+        _______, KC_LGUI, KC_LALT,                            LT(_spcfn,KC_SPC),                             KC_RCTL, _______, MO(_FN_i3), LGUI(LALT(LSFT(KC_LEFT))), LGUI(LALT(LSFT(KC_DOWN))), LGUI(LALT(LSFT(KC_RGHT)))
         ),
 
     [_rgb] = LAYOUT_all(
