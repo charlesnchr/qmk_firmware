@@ -15,6 +15,10 @@
  */
 #include QMK_KEYBOARD_H
 
+#include "midi.h"
+
+extern MidiDevice midi_device;
+
 enum layers {
     _qwerty,
     _fn1,
@@ -27,10 +31,64 @@ enum layers {
     _colemak
 };
 
+enum keycodes {
+    MIDI_CC1 = SAFE_RANGE,
+    MIDI_CC2,
+    MIDI_CC3,
+    MIDI_CC4,
+    MIDI_CC5,
+    MIDI_CC6,
+    MIDI_CC7,
+    MIDI_CC8,
+    MIDI_CC9,
+    MIDI_CC10,
+    MIDI_CC11,
+    MIDI_CC12,
+    MIDI_CC13,
+    MIDI_CC14,
+    MIDI_CC15,
+    MIDI_CC16,
+    MIDI_CC17,
+    MIDI_CC18,
+    MIDI_CC19,
+    MIDI_CC20,
+    MIDI_CC21,
+    MIDI_CC22,
+    MIDI_CC23,
+    MIDI_CC24,
+    MIDI_CC25,
+    MIDI_CC26,
+    MIDI_CC_V0,
+    MIDI_CC_V1,
+    MIDI_CC_V2,
+    MIDI_CC_V3,
+    MIDI_CC_V4,
+    MIDI_CC_V5,
+    MIDI_CC_V6,
+    MIDI_CC_V7,
+    MIDI_CC_V8,
+    MIDI_CC_V9,
+    MIDI_CC_V10,
+    MIDI_CC_V11,
+};
+
+
+
+#define MIDI_CC_OFF 0
+#define MIDI_CC_ON  127
+
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    /* [_qwerty] = LAYOUT( */
+    /*     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, */
+    /*     LCTL_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_ENT, */
+    /*     KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   KC_SLSH, */
+    /*     MO(_fn3), KC_LGUI, KC_LALT, LT(_fn1,KC_SPC),                 LT(_fn2,KC_SPC),              MO(_fn3), KC_RCTL, KC_DOWN, KC_UP */
+    /* ), */
     [_qwerty] = LAYOUT(
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-        LCTL_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_ENT,
+        MIDI_CC_V0,  MIDI_CC_V1,    MIDI_CC_V2,    MIDI_CC_V3,    MIDI_CC_V4,    MIDI_CC_V5,    MIDI_CC_V6,    MIDI_CC_V7,    MIDI_CC_V8,    MIDI_CC_V9,    MIDI_CC_V10,    MIDI_CC_V11,
+        LCTL_T(KC_ESC),    MIDI_CC1,    MIDI_CC2,    MIDI_CC3,    MIDI_CC4,    MIDI_CC5,    MIDI_CC6,    MIDI_CC7,    MIDI_CC8,    MIDI_CC9,    MIDI_CC10,
         KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   KC_SLSH,
         MO(_fn3), KC_LGUI, KC_LALT, LT(_fn1,KC_SPC),                 LT(_fn2,KC_SPC),              MO(_fn3), KC_RCTL, KC_DOWN, KC_UP
     ),
@@ -67,3 +125,129 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+    switch (keycode) {
+
+        case MIDI_CC_V0:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 0);
+            } else {
+            }
+            return false;
+            break;
+
+
+        case MIDI_CC_V1:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 12);
+            } else {
+            }
+            return false;
+            break;
+
+
+        case MIDI_CC_V2:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 23);
+            } else {
+            }
+            return false;
+            break;
+
+
+        case MIDI_CC_V3:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 35);
+            } else {
+            }
+            return false;
+            break;
+
+
+        case MIDI_CC_V4:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 46);
+            } else {
+            }
+            return false;
+            break;
+
+
+        case MIDI_CC_V5:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 58);
+            } else {
+            }
+            return false;
+            break;
+
+
+        case MIDI_CC_V6:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 69);
+            } else {
+            }
+            return false;
+            break;
+
+
+        case MIDI_CC_V7:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 81);
+            } else {
+            }
+            return false;
+            break;
+
+
+        case MIDI_CC_V8:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 92);
+            } else {
+            }
+            return false;
+            break;
+
+
+        case MIDI_CC_V9:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 104);
+            } else {
+            }
+            return false;
+            break;
+
+
+        case MIDI_CC_V10:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 115);
+            } else {
+            }
+            return false;
+            break;
+
+        case MIDI_CC_V11:
+            if (record->event.pressed) {
+                midi_send_cc(&midi_device, 0, 80, 127);
+            } else {
+            }
+            return false;
+            break;
+
+
+
+        /* case MIDI_CC80: */
+        /*     if (record->event.pressed) { */
+        /*         midi_send_cc(&midi_device, 0, 80, MIDI_CC_ON); */
+        /*     } else { */
+        /*         midi_send_cc(&midi_device, 0, 80, MIDI_CC_OFF); */
+        /*     } */
+        /*     return true; */
+        /*     break; */
+        default:
+            return true;  // Process all other keycodes normally
+    }
+}
