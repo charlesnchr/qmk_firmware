@@ -23,6 +23,7 @@ extern MidiDevice midi_device;
 
 enum layers {
     _QW,
+    _QW2,
     _FN,
 };
 
@@ -94,7 +95,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MIDI_CC_V0,  MIDI_CC_V1,    MIDI_CC_V2,    MIDI_CC_V3,    MIDI_CC_V4,    MIDI_CC_V5,    MIDI_CC_V6,    MIDI_CC_V7,    MIDI_CC_V8,    MIDI_CC_V9,    MIDI_CC_V10,    MIDI_CC_V11,    MIDI_CC_V12, MIDI_CC_V13, MIDI_CC_V14,
     MI_OCTU, MI_Cs_1,    MI_Ds_1,    KC_C,    MI_Fs_1,    MI_Gs_1,    MI_As_1,  KC_UP,   MI_Cs_2, MI_Ds_2,    KC_M,    MI_Fs_2, MI_Gs_2,  MI_As_2, KC_RSFT,
     MI_OCTD, MI_C_1,  MI_D_1,  MI_E_1,   MI_F_1,   MI_G_1, MI_A_1,   MI_B_1, MI_C_2,  MI_D_2,  MI_E_2,   MI_F_2,   MI_G_2, MI_A_2,   MI_B_2,
-    KC_LSFT, MIDI_CC1,    MIDI_CC2,    MIDI_CC3,    MIDI_CC4,    MIDI_CC5,    MI_OCTU,    MI_VELU,    MIDI_CC64_on,    MIDI_CC6,    MIDI_CC7,    MIDI_CC8,    MIDI_CC9, MIDI_CC10, KC_H,
+    TG(_QW2), MIDI_CC1,    MIDI_CC2,    MIDI_CC3,    MIDI_CC4,    MIDI_CC5,    MI_OCTU,    MI_VELU,    MIDI_CC64_on,    MIDI_CC6,    MIDI_CC7,    MIDI_CC8,    MIDI_CC9, MIDI_CC10, KC_H,
+    MO(_FN), MIDI_CC11,    MIDI_CC12,    MIDI_CC13,    MIDI_CC14,    MIDI_CC15,    MI_OCTD,    MI_VELD,    MIDI_CC64_off, MIDI_CC16,    MIDI_CC17,    MIDI_CC18,    MIDI_CC19,    MIDI_CC20, KC_H
+ ),
+
+ [_QW2] = LAYOUT_ortho_5x15( /* QWERTY */
+    MIDI_CC_V0,  MIDI_CC_V1,    MIDI_CC_V2,    MIDI_CC_V3,    MIDI_CC_V4,    MIDI_CC_V5,    MIDI_CC_V6,    MIDI_CC_V7,    MIDI_CC_V8,    MIDI_CC_V9,    MI_C,    MI_Cs,    MI_D,    MI_Ds, MIDI_CC_V14,
+    MI_OCTU, MI_C,    MI_Cs,    MI_D,    MI_Ds,    MI_Gs_1,    MI_As_1,  KC_UP,   MI_Cs_2, MI_Ds_2,    MI_E,    MI_F,    MI_Fs,    MI_G, KC_RSFT,
+    MI_OCTD, MI_C_2,  MI_D_1,  MI_E_1,   MI_F_1,   MI_G_1, MI_A_1,   MI_B_1, MI_C_2,  MI_D_2,  MI_Gs,    MI_A,    MI_As,    MI_C_1,   MI_Cs_1,
+    TG(_QW2), MIDI_CC1,    MIDI_CC2,    MIDI_CC3,    MIDI_CC4,    MIDI_CC5,    MI_OCTU,    MI_VELU,    MIDI_CC64_on,    MIDI_CC6,    MI_D_1,    MI_Ds_1,    MI_E_1,    MI_F_1, KC_H,
     MO(_FN), MIDI_CC11,    MIDI_CC12,    MIDI_CC13,    MIDI_CC14,    MIDI_CC15,    MI_OCTD,    MI_VELD,    MIDI_CC64_off, MIDI_CC16,    MIDI_CC17,    MIDI_CC18,    MIDI_CC19,    MIDI_CC20, KC_H
  ),
 
