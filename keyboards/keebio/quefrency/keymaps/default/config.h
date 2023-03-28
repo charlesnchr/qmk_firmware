@@ -32,3 +32,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_MAX_SPEED 20
 #define MOUSEKEY_WHEEL_DELAY 10
 
+#define IGNORE_MOD_TAP_INTERRUPT
+#define TAPPING_TERM 150
