@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,   KC_LGUI,   KC_LALT,                       KC_SPC,           KC_RGUI, KC_RALT, KC_LCTL, MO(_mouse)
     ),
     [_numpad] = LAYOUT_60_ansi(
-        RESET,   LCTL(KC_1), LCTL(KC_2), LCTL(KC_3), LCTL(KC_4), LCTL(KC_5), _______, _______, _______, _______, _______, _______, _______, _______,
+        QK_BOOT,   LCTL(KC_1), LCTL(KC_2), LCTL(KC_3), LCTL(KC_4), LCTL(KC_5), _______, _______, _______, _______, _______, _______, _______, _______,
         _______,     _______, LALT(KC_T), _______, _______, _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, _______, _______, _______,
         _______,       _______, _______, _______, _______, _______, _______, _______, KC_KP_7, KC_KP_5, KC_KP_6, _______, KC_ENT,
         _______,            _______, _______, _______, _______, _______, _______, _______, KC_KP_1, KC_KP_2, KC_KP_3, _______,
