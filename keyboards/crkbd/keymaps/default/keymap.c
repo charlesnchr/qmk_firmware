@@ -95,11 +95,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [5] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,   KC_P,  KC_BSPC,
+       KC_TAB,    HYPR(KC_Q),    HYPR(KC_W),    HYPR(KC_E),    HYPR(KC_R),    HYPR(KC_T),                         HYPR(KC_Y),    HYPR(KC_U),    HYPR(KC_I),    HYPR(KC_O),   HYPR(KC_P),  LCTL(KC_BSPC),
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      LCTL_T(KC_ESC),    LSFT_T(KC_A),    LALT_T(KC_S),    LGUI_T(KC_D),    LCTL_T(KC_F),    KC_G,   KC_LEFT,    KC_DOWN,    KC_UP,    KC_RGHT, XXXXXXX, KC_DEL,
+      HYPR(KC_ESC),    HYPR(KC_A),    HYPR(KC_S),    HYPR(KC_D),    HYPR(KC_F),    HYPR(KC_G),   KC_LEFT,    KC_DOWN,    KC_UP,    KC_RGHT, XXXXXXX, LCTL(KC_DEL),
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    LSFT_T(KC_Z),   LCTL(KC_PGUP), LCTL(KC_PGDN),LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_LEFT), LCTL(KC_RGHT), KC_HOME,  KC_END, RSFT_T(KC_SLSH),  RSFT_T(KC_ENT),
+      KC_LSFT,    LSFT_T(KC_Z),   LCTL(KC_PGUP), LCTL(KC_PGDN),LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_LEFT), LCTL(KC_RGHT), KC_HOME,  KC_END,  HYPR(KC_SLSH),  RSFT_T(KC_ENT),
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   MO(1),  KC_SPC,     RGUI_T(KC_SPC),   KC_RALT, XXXXXXX
                                       //`--------------------------'  `--------------------------'
