@@ -43,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    LSFT_T(KC_Z),    LALT_T(KC_X),    KC_C,    KC_V,    KC_B,                         RALT_T(KC_N),    LALT_T(KC_M), RGUI_T(KC_COMM),  RCTL_T(KC_DOT), RSFT_T(KC_SLSH),  RSFT_T(KC_ENT),
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                          LGUI_T(KC_MINS),   LT(2, KC_BSPC),  LT(6, KC_SPC),     LGUI_T(KC_SPC),   LT(3, KC_LBRC), LT(5, KC_RBRC)
+                          KC_LGUI,   LT(2, KC_MINS),  LT(6, KC_SPC),     LGUI_T(KC_SPC),   LT(3, KC_LBRC), LT(5, KC_RBRC)
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    LSFT_T(KC_Z),    LALT_T(KC_X),    KC_C,    KC_V,    KC_B,                         RALT_T(KC_N),    LALT_T(KC_M), RGUI_T(KC_COMM),  RCTL_T(KC_DOT), RSFT_T(KC_SLSH),  RSFT_T(KC_ENT),
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                          LGUI_T(KC_MINS),   LT(2, KC_BSPC),  KC_SPC,     LGUI_T(KC_SPC),   LT(3, KC_LBRC), LT(5, KC_RBRC)
+                          KC_LGUI,   LT(2, KC_BSPC),  KC_SPC,     LGUI_T(KC_SPC),   LT(3, KC_LBRC), LT(5, KC_RBRC)
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -101,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_BTN1, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_WH_D, KC_WH_R,             KC_PGUP, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      MO(7), MO(7), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      MO(7), MO(7), LGUI(KC_F1), LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4),                           XXXXXXX, qwerty, gamer, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI, _______,  KC_SPC,     KC_0, _______, KC_RALT
                                       //`--------------------------'  `--------------------------'
@@ -109,11 +109,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [6] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    LCAG(KC_Q),    LCAG(KC_W),    LCAG(KC_E),    LCAG(KC_R),    LCAG(KC_T), LCAG(KC_Y),  LCAG(KC_U), LCAG(KC_I),  LCAG(KC_O), LCAG(KC_P),  LCTL(KC_BSPC),
+       KC_ESC,    KC_HOME,    KC_UP,    KC_END,    KC_VOLU, KC_MNXT, LCAG(KC_Y),  LCAG(KC_U), LCAG(KC_I),  LCAG(KC_O), LCAG(KC_P),  LCTL(KC_BSPC),
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      LCAG(KC_ESC),    LCAG(KC_A),    LCAG(KC_S),    LCAG(KC_D),    LCAG(KC_F),    LCAG(KC_G),   KC_LEFT,    KC_DOWN,    KC_UP,    KC_RGHT, LCAG(KC_SCLN), LCTL(KC_DEL),
+      LCAG(KC_ESC),    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_VOLD,    KC_MPRV,   KC_LEFT,    KC_DOWN,    KC_UP,    KC_RGHT, LCAG(KC_SCLN), LCTL(KC_DEL),
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    LSFT_T(KC_INS), LCAG(KC_X), LCAG(KC_C), LCAG(KC_V), LCAG(KC_B), LCTL(KC_LEFT), LCTL(KC_RGHT), KC_HOME,  KC_END,  RSFT_T(KC_F4),  RSFT_T(KC_ENT),
+      KC_LSFT,    LSFT_T(KC_INS), LCAG(KC_X), LCAG(KC_C), KC_MUTE, KC_MPLY, LCTL(KC_LEFT), LCTL(KC_RGHT), KC_HOME,  KC_END,  RSFT_T(KC_F4),  RSFT_T(KC_ENT),
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   MO(1),  KC_SPC,     RGUI_T(KC_SPC),   KC_RALT, XXXXXXX
                                       //`--------------------------'  `--------------------------'
@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [7] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    qwerty,    gamer,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    endash,    emdash,   aas, KC_BSPC,
+       LALT(KC_F4),    qwerty,    gamer,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    endash,    emdash,   aas, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       LCTL_T(KC_ESC),    LSFT_T(KC_A),    LALT_T(KC_S),    LGUI_T(KC_D),    LCTL_T(KC_F),    KC_G,                  KC_H,    KC_J,    KC_K,    KC_L, aes, oes,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
