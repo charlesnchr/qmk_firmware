@@ -25,8 +25,7 @@ enum custom_keycodes {
     oes,
     aa,
     aas,
-    pnd,
-    eur,
+    autorun,
     endash,
     emdash,
     qwerty,
@@ -53,19 +52,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       LCTL_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                  KC_H,    KC_J,    KC_K,    KC_L, LCTL_T(KC_SCLN), KC_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    LSFT_T(KC_Z),    LALT_T(KC_X),    KC_C,    KC_V,    KC_B,                         RALT_T(KC_N),    LALT_T(KC_M), RGUI_T(KC_COMM),  RCTL_T(KC_DOT), RSFT_T(KC_SLSH),  RSFT_T(KC_ENT),
+      KC_LSFT,    LSFT_T(KC_Z),    LALT_T(KC_X),    LGUI_T(KC_C),    KC_V,    KC_B,                         RALT_T(KC_N),    LALT_T(KC_M), RGUI_T(KC_COMM),  RCTL_T(KC_DOT), RSFT_T(KC_SLSH),  RSFT_T(KC_ENT),
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                          KC_LGUI,   LT(2, KC_BSPC),  KC_SPC,     LGUI_T(KC_SPC),   LT(3, KC_LBRC), LT(5, KC_RBRC)
+                          KC_LCTL,   LT(3, KC_BSPC),  KC_SPC,     LGUI_T(KC_SPC),   LT(2, KC_LBRC), LT(5, KC_RBRC)
                                       //`--------------------------'  `--------------------------'
   ),
 
     [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_GRV, KC_EXLM, KC_AT, KC_HASH,  KC_DLR, KC_PERC,                        XXXXXXX,KC_7, KC_8, KC_9, aa, KC_BSPC,
+       KC_GRV, KC_EXLM, KC_AT, KC_HASH,  KC_DLR, KC_PERC,                        XXXXXXX,KC_7, KC_8, KC_9, aa, KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      MO(8), MO(8), XXXXXXX, KC_MINS, KC_UNDS, KC_CIRC,                           KC_AMPR, KC_4, KC_5, KC_6, ae, oe,
+      KC_F5, LCTL(KC_6), XXXXXXX, KC_MINS, KC_UNDS, KC_CIRC,                           KC_AMPR, KC_4, KC_5, KC_6, ae, oe,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      MO(7), MO(7), XXXXXXX, KC_EQL, KC_PLUS, KC_ASTR,                         KC_PIPE, KC_1, KC_2, KC_3, KC_BSLS, LT(7, KC_ENT),
+      MO(6), MO(6), XXXXXXX, KC_EQL, KC_PLUS, KC_ASTR,                         KC_PIPE, KC_1, KC_2, KC_3, KC_BSLS, LT(6, KC_ENT),
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI, _______,  KC_SPC,     KC_0, KC_LPRN, KC_RPRN
                                       //`--------------------------'  `--------------------------'
@@ -77,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_CAPS, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,   KC_8,    KC_9,  KC_0, KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, KC_BSLS, KC_MINS,  KC_UNDS, KC_EQL, KC_PLUS,                      KC_F11, KC_F12, KC_PIPE, XXXXXXX, XXXXXXX, KC_RSFT,
+      KC_LSFT, KC_BSLS, autorun,  QK_LOCK, KC_EQL, KC_PLUS,                      KC_F11, KC_F12, KC_PIPE, XXXXXXX, XXXXXXX, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   MO(4),  KC_SPC,     KC_ENT, _______, KC_0
                                       //`--------------------------'  `--------------------------'
@@ -109,39 +108,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [6] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC,    KC_HOME,    KC_UP,    KC_END,    KC_VOLU, KC_MNXT, LCAG(KC_Y),  LCAG(KC_U), LCAG(KC_I),  LCAG(KC_O), LCAG(KC_P),  LCTL(KC_BSPC),
+       LALT(KC_TAB),    KC_HOME,    KC_UP,    KC_END,    KC_VOLU, KC_MNXT,   KC_Y,   KC_U, endash,  emdash, aas,  LCTL(KC_BSPC),
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      LCAG(KC_ESC),    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_VOLD,    KC_MPRV,   KC_LEFT,    KC_DOWN,    KC_UP,    KC_RGHT, LCAG(KC_SCLN), LCTL(KC_DEL),
+      LCAG(KC_ESC),    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_VOLD,    KC_MPRV,   KC_LEFT,    KC_DOWN,    KC_UP,    KC_RGHT, aes, oes,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    LSFT_T(KC_INS), LCAG(KC_X), LCAG(KC_C), KC_MUTE, KC_MPLY, LCTL(KC_LEFT), LCTL(KC_RGHT), KC_HOME,  KC_END,  RSFT_T(KC_F4),  RSFT_T(KC_ENT),
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(1),  KC_SPC,     RGUI_T(KC_SPC),   KC_RALT, XXXXXXX
-                                      //`--------------------------'  `--------------------------'
-  ),
-
-  [7] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       LALT(KC_F4),    qwerty,    gamer,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    endash,    emdash,   aas, KC_BSPC,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      LCTL_T(KC_ESC),    LSFT_T(KC_A),    LALT_T(KC_S),    LGUI_T(KC_D),    LCTL_T(KC_F),    KC_G,                  KC_H,    KC_J,    KC_K,    KC_L, aes, oes,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    LSFT_T(KC_Z),    LALT_T(KC_X),    KC_C,    KC_V,    KC_B,                         KC_N,    RALT_T(KC_M), RGUI_T(KC_COMM),  RCTL_T(KC_DOT), RSFT_T(KC_SLSH),  RSFT_T(KC_ENT),
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   MO(1),  KC_SPC,     RGUI_T(KC_SPC),   KC_RALT, aes
                                       //`--------------------------'  `--------------------------'
-    ),
-
-    [8] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_GRV, KC_EXLM, KC_AT, KC_HASH,  KC_DLR, KC_PERC,                        KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_CAPS, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,   KC_8,    KC_9,  KC_0, KC_DEL,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, KC_SPC, KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX,                        KC_MINS,  KC_UNDS, KC_EQL, KC_PLUS, KC_BSLS, KC_RSFT,
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_ENT,   KC_LPRN, KC_RPRN
-                                      //`--------------------------'  `--------------------------'
-    ),
+  )
 
 };
 
@@ -150,76 +125,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
   }
   return rotation;
-}
-
-#define L_BASE 0
-#define L_LOWER 2
-#define L_RAISE 4
-#define L_ADJUST 8
-
-void oled_render_layer_state(void) {
-    oled_write_P(PSTR("Layer: "), false);
-    switch (layer_state) {
-        case L_BASE:
-            oled_write_ln_P(PSTR("Default"), false);
-            break;
-        case L_LOWER:
-            oled_write_ln_P(PSTR("Lower"), false);
-            break;
-        case L_RAISE:
-            oled_write_ln_P(PSTR("Raise"), false);
-            break;
-        case L_ADJUST:
-        case L_ADJUST|L_LOWER:
-        case L_ADJUST|L_RAISE:
-        case L_ADJUST|L_LOWER|L_RAISE:
-            oled_write_ln_P(PSTR("Adjust"), false);
-            break;
-    }
-}
-
-
-char keylog_str[24] = {};
-
-const char code_to_name[60] = {
-    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
-    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-    'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
-    '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
-
-void set_keylog(uint16_t keycode, keyrecord_t *record) {
-  char name = ' ';
-    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) ||
-        (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) { keycode = keycode & 0xFF; }
-  if (keycode < 60) {
-    name = code_to_name[keycode];
-  }
-
-  // update keylog
-  snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c",
-           record->event.key.row, record->event.key.col,
-           keycode, name);
-}
-
-void oled_render_keylog(void) {
-    oled_write(keylog_str, false);
-}
-
-void render_bootmagic_status(bool status) {
-    /* Show Ctrl-Gui Swap options */
-    static const char PROGMEM logo[][2][3] = {
-        {{0x97, 0x98, 0}, {0xb7, 0xb8, 0}},
-        {{0x95, 0x96, 0}, {0xb5, 0xb6, 0}},
-    };
-    if (status) {
-        oled_write_ln_P(logo[0][0], false);
-        oled_write_ln_P(logo[0][1], false);
-    } else {
-        oled_write_ln_P(logo[1][0], false);
-        oled_write_ln_P(logo[1][1], false);
-    }
 }
 
 void oled_render_logo(void) {
@@ -241,6 +146,9 @@ bool oled_task_user(void) {
     }
     return false;
 }
+
+bool autorun_active = false;
+uint16_t autopress_timer;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // this is for display key log
@@ -290,20 +198,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
             break;
-        case pnd:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("l"));
-                SEND_STRING("-");
-            }
-            return false;
-            break;
-        case eur:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("="));
-                SEND_STRING("e");
-            }
-            return false;
-            break;
         case endash:
             if (record->event.pressed) {
                 SEND_STRING(SS_RALT("-"));
@@ -324,12 +218,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_on(0);
             }
             return false;
+            break;
         case gamer:
             if (record->event.pressed) {
                 layer_clear();
                 layer_on(1);
             }
             return false;
+            break;
+        case autorun:
+            if (record->event.pressed) {
+                autorun_active = !autorun_active;
+                if (autorun_active) {
+                    autopress_timer = timer_read();
+                }
+            }
+            return false;
+            break;
     }
     return true;
+}
+
+void matrix_scan_user(void) {
+    if (autorun_active) {
+        if (timer_elapsed(autopress_timer) > 50) {
+            tap_code(KC_W);
+            autopress_timer = timer_read();
+        }
+    }
 }
