@@ -25,6 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define QUICK_TAP_TERM 0
 //#define TAPPING_TERM 100
 
+#define MASTER_LEFT
+
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_BREATHING
     #define RGBLIGHT_EFFECT_RAINBOW_MOOD
@@ -41,3 +43,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     #define RGBLIGHT_SAT_STEP 17
     #define RGBLIGHT_VAL_STEP 17
 #endif
+
+#define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
+
+#define MOUSEKEY_DELAY 10
+#define MOUSEKEY_TIME_TO_MAX 30
+#define MOUSEKEY_MAX_SPEED 5
+#define MOUSEKEY_WHEEL_DELAY 10
