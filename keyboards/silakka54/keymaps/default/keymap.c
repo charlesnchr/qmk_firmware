@@ -202,6 +202,22 @@ enum custom_keycodes {
 #define OE_UC RCMD(RCTL(RSFT(LSFT(KC_QUOT))))     // Ä (ae uppercase - Option+u)
 #define AE_UC RCMD(RCTL(RSFT(LSFT(KC_SCLN))))  // Ø (oe uppercase - Option+slash)
 #define AA_UC RCMD(RCTL(RSFT(LSFT(KC_LBRC))))  // Å (aa uppercase - Option+[)
+/*
+ * One windows i have previously tried this with powertools to get æøå. Should reconcile
+ *
++         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
++         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
++         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, RCTL(RALT(RSFT(KC_F1))), RCTL(RALT(RSFT(KC_F2))), RCTL(RALT(RSFT(KC_F3))), KC_TRNS, KC_TRNS,
++         KC_TRNS, MO(8), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
++                                             KC_TRNS, KC_TRNS, KC_TRNS,           KC_TRNS,  KC_TRNS,  KC_TRNS
++     ),
++     [8] = LAYOUT(
++         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
++         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
++         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, RCTL(RALT(RSFT(RGUI(KC_F1)))), RCTL(RALT(RSFT(RGUI(KC_F2)))), RCTL(RALT(RSFT(RGUI(KC_F3)))), KC_TRNS, KC_TRNS,
++         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
++                                             KC_TRNS, KC_TRNS, KC_TRNS,           KC_TRNS,  KC_TRNS,  KC_TRNS
+*/
 
 // Layer momentary for uppercase Nordic chars
 #define MO8__ MO(8)
