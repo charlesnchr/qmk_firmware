@@ -18,106 +18,320 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
+// Custom keycodes
 enum custom_keycodes {
-    aes = SAFE_RANGE,
-    ae,
-    oe,
-    oes,
-    aa,
-    aas,
-    autorun,
-    endash,
-    emdash,
-    qwerty,
+    qwerty = SAFE_RANGE,
     gamer,
 };
 
+// Readability macros - Keep all keys 5 chars or less
+#define XXXXX KC_NO
+#define _____ KC_TRNS
+
+// Layer tap macros
+#define CESCP LCTL_T(KC_ESC)
+#define SAFTA LSFT_T(KC_A)
+#define SALTS LALT_T(KC_S)
+#define LGUID LGUI_T(KC_D)
+#define LCTLF LCTL_T(KC_F)
+#define SFTZC LSFT_T(KC_Z)
+#define LALTX LALT_T(KC_X)
+#define RALTN RALT_T(KC_N)
+#define LALTM LALT_T(KC_M)
+#define RGUIC RGUI_T(KC_COMM)
+#define RCTLD RCTL_T(KC_DOT)
+#define RSFTS RSFT_T(KC_SLSH)
+#define RSFTE RSFT_T(KC_ENT)
+#define LT2MN LT(2, KC_MINS)
+#define LT6SP LT(6, KC_SPC)
+#define LGUSP LGUI_T(KC_SPC)
+#define LT3BR LT(3, KC_LBRC)
+#define LT5BR LT(5, KC_RBRC)
+#define LCTSC LCTL_T(KC_SCLN)
+#define LT7A_ LT(7, KC_A)
+
+// Standard key shortcuts
+#define TAB__ KC_TAB
+#define ESC__ KC_ESC
+#define SPC__ KC_SPC
+#define BSPC_ KC_BSPC
+#define ENT__ KC_ENT
+#define DEL__ KC_DEL
+#define MINS_ KC_MINS
+#define LBRC_ KC_LBRC
+#define RBRC_ KC_RBRC
+#define SCLN_ KC_SCLN
+#define QUOT_ KC_QUOT
+#define COMM_ KC_COMM
+#define DOT__ KC_DOT
+#define SLSH_ KC_SLSH
+#define GRV__ KC_GRV
+
+// Numbers
+#define NUM1_ KC_1
+#define NUM2_ KC_2
+#define NUM3_ KC_3
+#define NUM4_ KC_4
+#define NUM5_ KC_5
+#define NUM6_ KC_6
+#define NUM7_ KC_7
+#define NUM8_ KC_8
+#define NUM9_ KC_9
+#define NUM0_ KC_0
+
+// Arrow keys and navigation
+#define UP___ KC_UP
+#define DOWN_ KC_DOWN
+#define LEFT_ KC_LEFT
+#define RGHT_ KC_RGHT
+#define HOME_ KC_HOME
+#define END__ KC_END
+#define PGUP_ KC_PGUP
+#define PGDN_ KC_PGDN
+
+// Function keys
+#define F1___ KC_F1
+#define F2___ KC_F2
+#define F3___ KC_F3
+#define F4___ KC_F4
+#define F5___ KC_F5
+#define F6___ KC_F6
+#define F7___ KC_F7
+#define F8___ KC_F8
+#define F9___ KC_F9
+#define F10__ KC_F10
+#define F11__ KC_F11
+#define F12__ KC_F12
+
+// Media keys
+#define VOLU_ KC_VOLU
+#define VOLD_ KC_VOLD
+#define MUTE_ KC_MUTE
+#define MNXT_ KC_MNXT
+#define MPRV_ KC_MPRV
+#define MPLY_ KC_MPLY
+
+// Mouse keys
+#define BTN1_ KC_BTN1
+#define BTN2_ KC_BTN2
+#define MSUP_ KC_MS_UP
+#define MSDN_ KC_MS_DOWN
+#define MSLT_ KC_MS_LEFT
+#define MSRT_ KC_MS_RIGHT
+#define WHU__ KC_WH_U
+#define WHD__ KC_WH_D
+#define WHL__ KC_WH_L
+#define WHR__ KC_WH_R
+
+// Layer momentary switches
+#define MO2__ MO(2)
+#define MO3__ MO(3)
+#define MO6__ MO(6)
+#define MO7__ MO(7)
+#define MO8__ MO(8)
+
+// Special keys
+#define BOOT_ QK_BOOT
+#define QWERT qwerty
+#define GAMR_ gamer
+
+// Letter keys
+#define Q____ KC_Q
+#define W____ KC_W
+#define E____ KC_E
+#define R____ KC_R
+#define T____ KC_T
+#define Y____ KC_Y
+#define U____ KC_U
+#define I____ KC_I
+#define O____ KC_O
+#define P____ KC_P
+#define A____ KC_A
+#define S____ KC_S
+#define D____ KC_D
+#define F____ KC_F
+#define G____ KC_G
+#define H____ KC_H
+#define J____ KC_J
+#define K____ KC_K
+#define L____ KC_L
+#define Z____ KC_Z
+#define X____ KC_X
+#define C____ KC_C
+#define V____ KC_V
+#define B____ KC_B
+#define N____ KC_N
+#define M____ KC_M
+
+// Modifiers
+#define LGUI_ KC_LGUI
+#define LCTL_ KC_LCTL
+#define LSFT_ KC_LSFT
+#define LALT_ KC_LALT
+
+// Mac function key triggers - RCmd+RCtrl+RShift+key (Karabiner maps these to Fn+F keys)
+#define FN1__ RCMD(RCTL(RSFT(KC_1)))  // Triggers Fn+F1 via Karabiner
+#define FN2__ RCMD(RCTL(RSFT(KC_2)))  // Triggers Fn+F2 via Karabiner
+#define FN3__ RCMD(RCTL(RSFT(KC_3)))  // Triggers Fn+F3 via Karabiner
+#define FN4__ RCMD(RCTL(RSFT(KC_4)))  // Triggers Fn+F4 via Karabiner
+#define FN5__ RCMD(RCTL(RSFT(KC_5)))  // Triggers Fn+F5 via Karabiner
+#define FN6__ RCMD(RCTL(RSFT(KC_6)))  // Triggers Fn+F6 via Karabiner
+#define FN7__ RCMD(RCTL(RSFT(KC_7)))  // Triggers Fn+F7 via Karabiner
+#define FN8__ RCMD(RCTL(RSFT(KC_8)))  // Triggers Fn+F8 via Karabiner
+#define FN9__ RCMD(RCTL(RSFT(KC_9)))  // Triggers Fn+F9 via Karabiner
+#define FN10_ RCMD(RCTL(RSFT(KC_0)))  // Triggers Fn+F10 via Karabiner
+#define FN11_ RCMD(RCTL(RSFT(KC_MINS))) // Triggers Fn+F11 via Karabiner
+#define FN12_ RCMD(RCTL(RSFT(KC_EQL)))  // Triggers Fn+F12 via Karabiner
+
+// Programming symbols - Python-focused layout
+#define EXCL_ LSFT(KC_1)     // !
+#define AT___ LSFT(KC_2)     // @
+#define HASH_ LSFT(KC_3)     // #
+#define DOLR_ LSFT(KC_4)     // $
+#define PERC_ LSFT(KC_5)     // %
+#define CARET LSFT(KC_6)     // ^
+#define AMPR_ LSFT(KC_7)     // &
+#define ASTR_ LSFT(KC_8)     // *
+#define LPRN_ LSFT(KC_9)     // (
+#define RPRN_ LSFT(KC_0)     // )
+#define LCBR_ LSFT(KC_LBRC)  // {
+#define RCBR_ LSFT(KC_RBRC)  // }
+#define LT___ LSFT(KC_COMM)  // <
+#define GT___ LSFT(KC_DOT)   // >
+#define PIPE_ LSFT(KC_BSLS)  // |
+#define QUES_ LSFT(KC_SLSH)  // ?
+#define UNDS_ LSFT(KC_MINS)  // _
+#define PLUS_ LSFT(KC_EQL)   // +
+#define TILD_ LSFT(KC_GRV)   // ~
+#define COLN_ LSFT(KC_SCLN)  // : (important for Python)
+#define BSLS_ KC_BSLS
+#define EQL__ KC_EQL
+
+// Nordic characters (lowercase and uppercase) - Karabiner mappings
+#define OE_LC RCMD(RCTL(RSFT(KC_QUOT))) // ø
+#define AE_LC RCMD(RCTL(RSFT(KC_SCLN))) // æ
+#define AA_LC RCMD(RCTL(RSFT(KC_LBRC))) // å
+#define OE_UC RCMD(RCTL(RSFT(LSFT(KC_QUOT))))  // Ø
+#define AE_UC RCMD(RCTL(RSFT(LSFT(KC_SCLN))))  // Æ
+#define AA_UC RCMD(RCTL(RSFT(LSFT(KC_LBRC))))  // Å
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    // Layer 0: Base (QWERTY) with home row mods
     [0] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
+       TAB__, Q____, W____, E____, R____, T____,                               Y____, U____, I____, O____, P____, BSPC_,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      LCTL_T(KC_ESC),    LSFT_T(KC_A),    LALT_T(KC_S),    LGUI_T(KC_D),    LCTL_T(KC_F),    KC_G,                  KC_H,    KC_J,    KC_K,    KC_L, LCTL_T(KC_SCLN), KC_QUOT,
+       CESCP, LT7A_, SALTS, LGUID, LCTLF, G____,                               H____, J____, K____, L____, LCTSC, QUOT_,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    LSFT_T(KC_Z),    LALT_T(KC_X),    KC_C,    KC_V,    KC_B,                         RALT_T(KC_N),    LALT_T(KC_M), RGUI_T(KC_COMM),  RCTL_T(KC_DOT), RSFT_T(KC_SLSH),  RSFT_T(KC_ENT),
+       LSFT_, SFTZC, LALTX, C____, V____, B____,                               RALTN, LALTM, RGUIC, RCTLD, RSFTS, RSFTE,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                          KC_LGUI,   LT(2, KC_MINS),  LT(6, KC_SPC),     LGUI_T(KC_SPC),   LT(3, KC_LBRC), LT(5, KC_RBRC)
+                                  LGUI_, LT2MN, LT6SP,                 LGUSP, LT3BR, LT5BR
                                       //`--------------------------'  `--------------------------'
-  ),
+    ),
 
+    // Layer 1: Gamer mode (no home row mods for gaming)
     [1] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
+       TAB__, Q____, W____, E____, R____, T____,                               Y____, U____, I____, O____, P____, BSPC_,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      LCTL_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                  KC_H,    KC_J,    KC_K,    KC_L, LCTL_T(KC_SCLN), KC_QUOT,
+       LCTL_, A____, S____, D____, F____, G____,                               H____, J____, K____, L____, SCLN_, QUOT_,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    LSFT_T(KC_Z),    LALT_T(KC_X),    LGUI_T(KC_C),    KC_V,    KC_B,                         RALT_T(KC_N),    LALT_T(KC_M), RGUI_T(KC_COMM),  RCTL_T(KC_DOT), RSFT_T(KC_SLSH),  RSFT_T(KC_ENT),
+       LSFT_, Z____, X____, C____, V____, B____,                               N____, M____, COMM_, DOT__, SLSH_, RSFTE,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                          KC_LCTL,   LT(3, KC_BSPC),  KC_SPC,     LGUI_T(KC_SPC),   LT(2, KC_LBRC), LT(5, KC_RBRC)
+                                  MO2__, LALT_, SPC__,                 LGUI_, _____, _____
                                       //`--------------------------'  `--------------------------'
-  ),
+    ),
 
+    // Layer 2: Numbers and Symbols
     [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_GRV, KC_EXLM, KC_AT, KC_HASH,  KC_DLR, KC_PERC,                        XXXXXXX,KC_7, KC_8, KC_9, aa, KC_DEL,
+       GRV__, EXCL_, AT___, HASH_, DOLR_, PERC_,                               CARET, AMPR_, ASTR_, UNDS_, PLUS_, DEL__,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_F5, LCTL(KC_6), XXXXXXX, KC_MINS, KC_UNDS, KC_CIRC,                           KC_AMPR, KC_4, KC_5, KC_6, ae, oe,
+       F5___, LCTL(KC_6), XXXXX, MINS_, UNDS_, CARET,                          AMPR_, NUM4_, NUM5_, NUM6_, NUM0_, EQL__,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      MO(6), MO(6), XXXXXXX, KC_EQL, KC_PLUS, KC_ASTR,                         KC_PIPE, KC_1, KC_2, KC_3, KC_BSLS, LT(6, KC_ENT),
+       MO3__, MO3__, XXXXX, EQL__, PLUS_, ASTR_,                               PIPE_, NUM1_, NUM2_, NUM3_, BSLS_, _____,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_0, KC_LPRN, KC_RPRN
+                                  _____, _____, _____,                 NUM0_, LPRN_, RPRN_
                                       //`--------------------------'  `--------------------------'
-  ),
+    ),
 
+    // Layer 3: Function Keys and Numbers
     [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TILD, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                              KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_BSPC,
+       TILD_, F1___, F2___, F3___, F4___, F5___,                               F6___, F7___, F8___, F9___, F10__, DEL__,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_CAPS, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,   KC_8,    KC_9,  KC_0, KC_DEL,
+       KC_CAPS, NUM1_, NUM2_, NUM3_, NUM4_, NUM5_,                             NUM6_, NUM7_, NUM8_, NUM9_, NUM0_, DEL__,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, KC_BSLS, autorun,  QK_LOCK, KC_EQL, KC_PLUS,                      KC_F11, KC_F12, KC_PIPE, XXXXXXX, XXXXXXX, KC_RSFT,
+       _____, BSLS_, QK_LOCK, XXXXX, EQL__, PLUS_,                             F11__, F12__, PIPE_, XXXXX, XXXXX, _____,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(4),  KC_SPC,     KC_ENT, _______, KC_0
+                                  _____, MO4__, _____,                 _____, _____, NUM0_
                                       //`--------------------------'  `--------------------------'
-  ),
+    ),
 
+    // Layer 4: Mac Function Keys via Karabiner
     [4] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       BOOT_, FN1__, FN2__, FN3__, FN4__, FN5__,                               FN6__, FN7__, FN8__, FN9__, FN10_, XXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXX, XXXXX,                       XXXXX, XXXXX, XXXXX, XXXXX, FN11_, FN12_,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXX, XXXXX,                       XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_ENT, _______, KC_RALT
+                                  _____, _____, _____,                 _____, _____, _____
                                       //`--------------------------'  `--------------------------'
-  ),
+    ),
 
-  [5] = LAYOUT_split_3x6_3(
+    // Layer 5: Mouse and Navigation
+    [5] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_ESC, XXXXXXX, KC_MS_UP, KC_BTN2, KC_WH_U, KC_WH_L,                      XXXXXXX, KC_HOME, KC_UP, KC_END, XXXXXXX, XXXXXXX,
+       ESC__, XXXXX, MSUP_, BTN2_, WHU__, WHL__,                               XXXXX, HOME_, UP___, END__, XXXXX, XXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_BTN1, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_WH_D, KC_WH_R,             KC_PGUP, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX,
+       BTN1_, MSLT_, MSDN_, MSRT_, WHD__, WHR__,                               PGUP_, LEFT_, DOWN_, RGHT_, PGDN_, XXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      MO(7), MO(7), LGUI(KC_F1), LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4),                           XXXXXXX, qwerty, gamer, XXXXXXX, XXXXXXX, XXXXXXX,
+       MO7__, MO7__, LGUI(KC_F1), LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4),       XXXXX, QWERT, GAMR_, XXXXX, XXXXX, XXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_0, _______, KC_RALT
+                                  _____, _____, _____,                 NUM0_, _____, _____
                                       //`--------------------------'  `--------------------------'
-  ),
+    ),
 
-  [6] = LAYOUT_split_3x6_3(
+    // Layer 6: Media and Advanced Navigation
+    [6] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       LALT(KC_TAB),    KC_HOME,    KC_UP,    KC_END,    KC_VOLU, KC_MNXT,   KC_Y,   KC_U, endash,  emdash, aas,  LCTL(KC_BSPC),
+       LALT(KC_TAB), HOME_, UP___, END__, VOLU_, MNXT_,                        Y____, U____, I____, O____, P____, LCTL(KC_BSPC),
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      LCAG(KC_ESC),    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_VOLD,    KC_MPRV,   KC_LEFT,    KC_DOWN,    KC_UP,    KC_RGHT, aes, oes,
+       LCAG(KC_ESC), LEFT_, DOWN_, RGHT_, VOLD_, MPRV_,                        LEFT_, DOWN_, UP___, RGHT_, XXXXX, XXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    LSFT_T(KC_INS), LCAG(KC_X), LCAG(KC_C), KC_MUTE, KC_MPLY, LCTL(KC_LEFT), LCTL(KC_RGHT), KC_HOME,  KC_END,  RSFT_T(KC_F4),  RSFT_T(KC_ENT),
+       _____, LSFT_T(KC_INS), LCAG(KC_X), LCAG(KC_C), MUTE_, MPLY_,            LCTL(KC_LEFT), LCTL(KC_RGHT), HOME_, END__, RSFT_T(KC_F4), RSFTE,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(1),  KC_SPC,     RGUI_T(KC_SPC),   KC_RALT, aes
+                                  _____, MO1__, _____,                 _____, KC_RALT, XXXXX
                                       //`--------------------------'  `--------------------------'
-  )
+    ),
 
+    // Layer 7: Programming Symbols (Python-focused) with Nordic characters
+    [7] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+       _____, _____, _____, _____, _____, _____,                               CARET, AMPR_, ASTR_, AE_LC, OE_LC, AA_LC,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+       _____, _____, _____, _____, _____, _____,                               LBRC_, RBRC_, LPRN_, RPRN_, LCBR_, RCBR_,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+       MO8__, _____, _____, _____, _____, _____,                               PLUS_, EQL__, GT___, LT___, COLN_, QUES_,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                  _____, _____, _____,                 _____, UNDS_, PIPE_
+                                      //`--------------------------'  `--------------------------'
+    ),
+
+    // Layer 8: Uppercase Nordic Characters
+    [8] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+       _____, _____, _____, _____, _____, _____,                               CARET, AMPR_, ASTR_, AE_UC, OE_UC, AA_UC,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+       _____, _____, _____, _____, _____, _____,                               LBRC_, RBRC_, LPRN_, RPRN_, LCBR_, RCBR_,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+       _____, _____, _____, _____, _____, _____,                               PLUS_, EQL__, GT___, LT___, COLN_, QUES_,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                  _____, _____, _____,                 _____, UNDS_, PIPE_
+                                      //`--------------------------'  `--------------------------'
+    )
 };
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -138,8 +352,6 @@ void oled_render_logo(void) {
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        /* oled_render_layer_state(); */
-        /* oled_render_keylog(); */
         oled_render_logo();
     } else {
         oled_render_logo();
@@ -147,71 +359,8 @@ bool oled_task_user(void) {
     return false;
 }
 
-bool autorun_active = false;
-uint16_t autopress_timer;
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  // this is for display key log
-  /* if (record->event.pressed) { */
-  /*   set_keylog(keycode, record); */
-  /* } */
-
     switch (keycode) {
-        case ae:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("a"));
-                SEND_STRING("e");
-            }
-            return false;
-            break;
-        case oe:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("o"));
-                SEND_STRING("/");
-            }
-            return false;
-            break;
-        case aes:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("A"));
-                SEND_STRING("E");
-            }
-            return false;
-        case oes:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("O"));
-                SEND_STRING("/");
-            }
-            return false;
-            break;
-        case aa:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("a"));
-                SEND_STRING("a");
-            }
-            return false;
-            break;
-        case aas:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("A"));
-                SEND_STRING("A");
-            }
-            return false;
-            break;
-        case endash:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("-"));
-                SEND_STRING("-.");
-            }
-            return false;
-            break;
-        case emdash:
-            if (record->event.pressed) {
-                SEND_STRING(SS_RALT("-"));
-                SEND_STRING("--");
-            }
-            return false;
-            break;
         case qwerty:
             if (record->event.pressed) {
                 layer_clear();
@@ -226,24 +375,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
             break;
-        case autorun:
-            if (record->event.pressed) {
-                autorun_active = !autorun_active;
-                if (autorun_active) {
-                    autopress_timer = timer_read();
-                }
-            }
-            return false;
-            break;
     }
     return true;
-}
-
-void matrix_scan_user(void) {
-    if (autorun_active) {
-        if (timer_elapsed(autopress_timer) > 50) {
-            tap_code(KC_W);
-            autopress_timer = timer_read();
-        }
-    }
 }
