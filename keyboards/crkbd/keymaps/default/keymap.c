@@ -124,8 +124,10 @@ enum custom_keycodes {
 #define WHR__ KC_WH_R
 
 // Layer momentary switches
+#define MO1__ MO(1)
 #define MO2__ MO(2)
 #define MO3__ MO(3)
+#define MO4__ MO(4)
 #define MO6__ MO(6)
 #define MO7__ MO(7)
 #define MO8__ MO(8)
