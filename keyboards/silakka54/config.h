@@ -20,14 +20,21 @@
 #define SERIAL_USART_TX_PIN GP0
 #define SERIAL_USART_RX_PIN GP1
 
-#define MOUSEKEY_DELAY 10
-#define MOUSEKEY_TIME_TO_MAX 30
-#define MOUSEKEY_MAX_SPEED 5
-#define MOUSEKEY_WHEEL_DELAY 10
+// Mouse movement settings - less aggressive acceleration
+#define MOUSEKEY_DELAY 10              // Delay before movement starts (ms)
+#define MOUSEKEY_INTERVAL 20             // Time between movement reports (ms)
+#define MOUSEKEY_TIME_TO_MAX 30          // Time to reach max speed (increase for slower acceleration)
+#define MOUSEKEY_MAX_SPEED 3             // Maximum cursor speed (lower = slower max speed)
+#define MOUSEKEY_WHEEL_DELAY 10         // Delay before wheel movement starts
+#define MOUSEKEY_WHEEL_INTERVAL 100       // Time between wheel reports (higher = slower scroll)
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 80    // Time for wheel to reach max speed
+#define MOUSEKEY_WHEEL_MAX_SPEED 2       // Maximum wheel speed (lower = smaller scroll steps)
 
-#define TAPPING_TERM 150
 #define USB_MAX_POWER_CONSUMPTION 100
 
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 200U
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_LED GP17
+
+#define TAPPING_TERM 150
+#define FLOW_TAP_TERM 150

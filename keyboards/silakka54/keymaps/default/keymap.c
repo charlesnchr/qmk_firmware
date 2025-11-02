@@ -25,17 +25,19 @@ enum custom_keycodes {
 #define LT5I_ LT(5, KC_I)
 #define LT5O_ LT(5, KC_O)
 #define SFTZC LSFT_T(KC_Z)
-#define LT5VC LT(5, KC_V)
-#define RALTN RALT_T(KC_N)
-#define LALTM LALT_T(KC_M)
+#define LT8V_ LT(8, KC_V)
+#define LT5C_ LT(5, KC_C)
+#define LT3N_ LT(3, KC_N)
 #define RGUIC RGUI_T(KC_COMM)
+#define RALTM RALT_T(KC_M)
 #define RCTLD RCTL_T(KC_DOT)
 #define RSFTS RSFT_T(KC_SLSH)
 #define LCTLR LCTL_T(KC_RBRC)
-#define ALTMN LALT_T(KC_MINS)
+#define ALTBS LALT_T(KC_BSPC)
 #define LT2SP LT(2, KC_SPC)
-#define LT5SP LT(5, KC_SPC)
+#define RGUSP RGUI_T(KC_SPC)
 #define LT4EN LT(4, KC_ENT)
+#define SQUOT LSFT(KC_QUOT)
 
 // Standard key shortcuts
 #define ESC__ KC_ESC
@@ -118,6 +120,7 @@ enum custom_keycodes {
 #define MO2__ MO(2)
 #define MO3__ MO(3)
 #define MO6__ MO(6)
+#define M09__ MO(9)
 
 // Special keys
 #define BOOT_ QK_BOOT
@@ -219,12 +222,6 @@ enum custom_keycodes {
 +                                             KC_TRNS, KC_TRNS, KC_TRNS,           KC_TRNS,  KC_TRNS,  KC_TRNS
 */
 
-// Layer momentary for uppercase Nordic chars
-#define MO8__ MO(8)
-
-
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // Layer 0: Base (QWERTY)
@@ -232,8 +229,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LT2GV, NUM1_, NUM2_, NUM3_, NUM4_, NUM5_,                               NUM6_, NUM7_, NUM8_, NUM9_, NUM0_, DEL__,
         TAB__, Q____, W____, E____, R____, T____,                               Y____, U____, LT5I_, LT5O_, P____, LBRC_,
         CESCP, LT7A_, SALTS, LGUID, LT7F_, G____,                               H____, J____, K____, L____, LT5SC, QUOT_,
-        LSFT_, SFTZC, LCTLX, C____, LT5VC, B____,                               RALTN, LALTM, RGUIC, RCTLD, RSFTS, LCTLR,
-                                     LGUI_, ALTMN, LT2SP,             LT5SP, BSPC_, LT4EN
+        LSFT_, SFTZC, LCTLX, LT5C_, LT8V_, B____,                               LT3N_, RALTM, RGUIC, RCTLD, RSFTS, LCTLR,
+                                     LGUI_, ALTBS, LT2SP,             RGUSP, BSPC_, LT4EN
     ),
     // Layer 1: Gamer
     [1] = LAYOUT(
@@ -254,10 +251,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Layer 3: Numpad
     [3] = LAYOUT(
         _____, FN1__, FN2__, FN3__, FN4__, FN5__,                               FN6__, FN7__, FN8__, FN9__, FN10_, MO6__,
-        _____, NUM7_, NUM8_, NUM9_, _____, _____,                               _____, _____, _____, _____, FN11_, FN12_,
-        _____, NUM4_, NUM5_, NUM6_, NUM0_, _____,                               _____, _____, _____, _____, _____, _____,
-        _____, NUM1_, NUM2_, NUM3_, _____, _____,                               _____, _____, _____, _____, _____, _____,
-                                     _____, _____, _____,             _____, _____, _____
+        _____, SLSH_, NUM7_, NUM8_, NUM9_, MINS_,                               _____, _____, _____, _____, FN11_, FN12_,
+        _____, ASTR_, NUM4_, NUM5_, NUM6_, PLUS_,                               _____, _____, _____, _____, _____, _____,
+        _____, ENT__, NUM1_, NUM2_, NUM3_, DOT__,                               _____, _____, _____, _____, _____, _____,
+                                     _____, _____, NUM0_,             _____, _____, _____
     ),
     // Layer 4: Mouse/Navigation/Mac Function Keys
     [4] = LAYOUT(
@@ -269,10 +266,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     // Layer 5: Programming Symbols/Numbers (Python-focused)
     [5] = LAYOUT(
-        _____, _____, _____, ASTR_, AMPR_, CARET,                               _____, _____, _____, _____, _____, MO6__,
-        LCBR_, RCBR_, LPRN_, RPRN_, LBRC_, RBRC_,                               RGHT_, NUM7_, NUM8_, NUM9_, DEL__, F12__,
-        QUES_, PIPE_, COLN_, MINS_, UNDS_, BSPC_,                               LEFT_, NUM4_, NUM5_, NUM6_, LBRC_, RBRC_,
-        BSLS_, SLSH_, LT___, GT___, EQL__, PLUS_,                               NUM0_, NUM1_, NUM2_, NUM3_, BSLS_, _____,
+        ENT__, BSPC_, QUOT_, ASTR_, AMPR_, CARET,                               _____, _____, _____, _____, _____, MO6__,
+        LT___, GT___, LPRN_, RPRN_, QUOT_, COLN_,                               SLSH_, NUM7_, NUM8_, NUM9_, MINS_, _____,
+        QUES_, SQUOT, LBRC_, RBRC_, UNDS_, MINS_,                               ASTR_, NUM4_, NUM5_, NUM6_, PLUS_, _____,
+        PIPE_, BSLS_, LCBR_, RCBR_, EQL__, PLUS_,                               ENT__, NUM1_, NUM2_, NUM3_, DOT__, _____,
                                      _____, _____, _____,             NUM0_, _____, _____
     ),
     // Layer 6: Adjust/Reset
@@ -286,19 +283,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // Layer 7: Programming Symbols (Right Side) - Python-focused, accessed via layer tap on A
     [7] = LAYOUT(
-        _____, _____, _____, _____, _____, _____,                               CARET, AMPR_, ASTR_, AE_LC, OE_LC, AA_LC,
-        _____, _____, _____, _____, _____, _____,                               LBRC_, RBRC_, LPRN_, RPRN_, LCBR_, RCBR_,
-        _____, _____, _____, _____, _____, _____,                               _____, UNDS_, MINS_, COLN_, PIPE_, QUES_,
-        MO8__, _____, _____, _____, _____, _____,                               PLUS_, EQL__, GT___, LT___, SLSH_, BSLS_,
+        _____, _____, _____, _____, _____, _____,                               CARET, AMPR_, ASTR_, _____, BSPC_, ENT__,
+        _____, _____, _____, _____, _____, _____,                               COLN_, QUOT_, LPRN_, RPRN_, LT___, GT___,
+        _____, _____, _____, _____, _____, _____,                               MINS_, UNDS_, LBRC_, RBRC_, SQUOT, QUES_,
+        _____, _____, _____, _____, _____, _____,                               PLUS_, EQL__, LCBR_, RCBR_, BSLS_, PIPE_,
                                      _____, _____, _____,             _____, _____, _____
     ),
 
     // Layer 8: Uppercase Nordic Characters - accessed via MO(8) on layer 7
     [8] = LAYOUT(
-        _____, _____, _____, _____, _____, _____,                               CARET, AMPR_, ASTR_, AE_UC, OE_UC, AA_UC,
-        _____, _____, _____, _____, _____, _____,                               LBRC_, RBRC_, LPRN_, RPRN_, LCBR_, RCBR_,
-        _____, _____, _____, _____, _____, _____,                               _____, UNDS_, MINS_, COLN_, PIPE_, QUES_,
-        _____, _____, _____, _____, _____, _____,                               PLUS_, EQL__, GT___, LT___, SLSH_, BSLS_,
+        _____, _____, _____, _____, _____, _____,                               _____, _____, _____, _____, _____, _____,
+        _____, _____, _____, _____, _____, _____,                               _____, _____, _____, _____, _____, _____,
+        _____, _____, _____, _____, _____, _____,                               _____, AE_LC, OE_LC, AA_LC, _____, _____,
+        M09__, _____, _____, _____, _____, _____,                               _____, _____, _____, _____, _____, _____,
+                                     _____, MO6__, _____,             NUM0_, _____, _____
+    ),
+
+    // Layer 8: Uppercase Nordic Characters - accessed via MO(8) on layer 7
+    [9] = LAYOUT(
+        _____, _____, _____, _____, _____, _____,                               _____, _____, _____, _____, _____, _____,
+        _____, _____, _____, _____, _____, _____,                               _____, _____, _____, _____, _____, _____,
+        _____, _____, _____, _____, _____, _____,                               _____, AE_UC, OE_UC, AA_UC, _____, _____,
+        _____, _____, _____, _____, _____, _____,                               _____, _____, _____, _____, _____, _____,
                                      _____, _____, _____,             _____, _____, _____
     ),
 };
